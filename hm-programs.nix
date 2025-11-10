@@ -37,4 +37,13 @@
     enable = true;
     generateCompletions = true;
   };
+
+  programs.kitty = {
+    enable = true;
+  };
+
+  programs.alacritty = {
+    enable = true;
+    # theme = "horizon_dark";
+  };
 }

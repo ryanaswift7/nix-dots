@@ -1,0 +1,37 @@
+[general]
+import = [
+  "~/.config/alacritty/themes/horizon_dark.toml",
+]
+
+[window]
+opacity = 0.92
+padding = {x = 10, y = 10}
+dynamic_title = false
+dynamic_padding = true
+
+[font]
+# Set the font size
+size = 10.0
+
+# --- Normal Font ---
+[font.normal]
+family = "Martian Mono NF"
+style = "Regular"
+
+# --- Bold Font ---
+[font.bold]
+family = "Martian Mono NF"
+style = "Bold"
+
+# --- Italic Font (using a synthetic slant) ---
+# Martian Mono does not have a true Italic style.
+# We use "Oblique" to have Alacritty slant the 'Regular' font.
+[font.italic]
+family = "Martian Mono NF"
+style = "Oblique"
+
+# --- Bold Italic Font (using a synthetic slant) ---
+# We use "Bold Oblique" to have Alacritty slant the 'Bold' font.
+[font.bold_italic]
+family = "Martian Mono NF"
+style = "Bold Oblique"

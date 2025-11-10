@@ -5,6 +5,7 @@
 # Import the package lists
 let
   package-set = import ./packages.nix { inherit pkgs; };
+  homeDir = config.home.homeDirectory;
 in
 {
   imports = [
@@ -19,6 +20,12 @@ in
 
   # --- 1. Use the user packages list ---
   home.packages = package-set.ryan;
+
+  xdg.configFile."alacritty" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/nix-dots/alacritty";
+    recursive = true;
+  };
+
 
   # --- 2. Use packages in Home Manager options ---
   # This also works perfectly.

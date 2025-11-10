@@ -30,15 +30,18 @@
     vlc
     celluloid
     uv
-    alacritty
     wezterm
     networkmanager-openconnect
     unstable.vscode.fhs
     niri
     openconnect-sso
-
-    # From unstable
-    # unstable.neovim
-    # unstable.starship
+    nerd-fonts.martian-mono
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.meslo-lg
+    nerd-fonts.fira-mono
+    nerd-fonts.fira-code
+    nerd-fonts.space-mono
+    nerd-fonts.symbols-only
+    cliphist
   ];
 }
