@@ -1,6 +1,6 @@
 # /etc/nixos/home.nix
 
-{ config, pkgs, ... }:
+{ config, pkgs, dankMaterialShell, niri, ... }:
 
 # Import the package lists
 let
@@ -10,7 +10,11 @@ in
 {
   imports = [
     ./hm-programs.nix
-  ];
+    dankMaterialShell.homeModules.dankMaterialShell.default
+    niri.homeModules.niri
+    dankMaterialShell.homeModules.dankMaterialShell.niri
+  ];	
+
   # Set user and home directory.
   # These are used by the standalone builder.
   home.username = "ryan";

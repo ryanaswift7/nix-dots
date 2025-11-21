@@ -5,24 +5,29 @@
 { config, pkgs, ... }:
 
 let
-  # home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz;
   package-set = import ./packages.nix { inherit pkgs; };
 in
 {
-   # nixpkgs.overlays = [
-   # 	(import "${builtins.fetchTarball https://github.com/ThinkChaos/openconnect-sso/archive/fix/nix-flake.tar.gz}/overlay.nix")
-   # ];
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  # imports =
+  #   [ # Include the results of the hardware scan.
+  #     ./hardware-configuration.nix
+  #   ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_zen;  # _latest
+
+  # additional kernels -> doesn't work
+  # specialisation = {
+  #   zen-kernel = {
+  #     configuration = {
+  #       boot.kernelPackages = pkgs.linuxPackages_zen;
+  #     };
+  #   };
+  # };
 
   # enable keyring unlock at login from gdm
   services.gnome.gnome-keyring.enable = true;
@@ -68,6 +73,9 @@ in
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  # enable cosmic de
+  services.desktopManager.cosmic.enable = true;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -107,14 +115,14 @@ in
     shell = pkgs.fish;
   };
 
-  home-manager.useGlobalPkgs = true;
-
-  home-manager.users.ryan = {
-    imports = [ ./home.nix];
-  };
+  # home-manager.useGlobalPkgs = true;
+  #
+  # home-manager.users.ryan = {
+  #   imports = [ ./home.nix];
+  # };
 
   # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.enable = false;
   services.displayManager.autoLogin.user = "ryan";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229

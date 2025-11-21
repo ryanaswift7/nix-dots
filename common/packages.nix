@@ -33,7 +33,7 @@
     wezterm
     networkmanager-openconnect
     unstable.vscode.fhs
-    niri
+    # niri
     openconnect-sso
     nerd-fonts.martian-mono
     nerd-fonts.jetbrains-mono
@@ -43,5 +43,6 @@
     nerd-fonts.space-mono
     nerd-fonts.symbols-only
     cliphist
+    kdePackages.dolphin
   ];
 }

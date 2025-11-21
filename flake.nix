@@ -10,8 +10,8 @@
 
     # --- Home Manager ---
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # === ADDED ===
@@ -20,13 +20,33 @@
       url = "github:ThinkChaos/openconnect-sso/fix/nix-flake";
       # Tell it to use our main nixpkgs
       inputs.nixpkgs.follows = "nixpkgs";
-      # inputs.system.follows = "system";
-      # inputs.flake-utils.follows = "utils";
+    };
+
+    dgop = {
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    dms-cli = {
+      url = "github:AvengeMedia/danklinux";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    dankMaterialShell = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.dgop.follows = "dgop";
+      inputs.dms-cli.follows = "dms-cli";
+    };
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
   # Make sure to add `openconnect-sso` to the function arguments
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, openconnect-sso, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, openconnect-sso, dankMaterialShell, niri, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -56,9 +76,9 @@
 
     in
     {
-      # === OUTPUT 1: NixOS Configuration ===
+      # === OUTPUT 1: NixOS laptop vm Configuration ===
       nixosConfigurations = {
-        nixos-machine = nixpkgs.lib.nixosSystem {
+        laptop-vm = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
 
@@ -72,8 +92,21 @@
             
             })
 
-            ./configuration.nix
-            home-manager.nixosModules.default
+            ./hosts/laptop-vm/configuration.nix
+	    ./common/configuration.nix
+	    home-manager.nixosModules.home-manager
+	    {
+	    	home-manager.useGlobalPkgs = true;
+		home-manager.useUserPackages = true;
+		home-manager.extraSpecialArgs = {
+		# --- PASS BOTH FLAKES TO HOME.NIX ---
+		  dankMaterialShell = inputs.dankMaterialShell;
+		  niri = inputs.niri;
+		};
+		home-manager.users.ryan = import ./common/home.nix;
+	    }
+
+            # home-manager.nixosModules.default
           ];
         };
       };
@@ -83,8 +116,8 @@
         nix-hm = home-manager.lib.homeManagerConfiguration {
           # Pass the pkgs set that has both overlays
           pkgs = hm-pkgs; 
-          extraSpecialArgs = { inherit inputs; }; 
-          modules = [ ./home.nix ];
+          extraSpecialArgs = { inherit inputs dankMaterialShell niri; }; 
+          modules = [ ./common/home.nix ];
         };
       };
     };
