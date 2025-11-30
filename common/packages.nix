@@ -12,7 +12,7 @@
     wget
     curl
     tmux
-    google-chrome
+    # google-chrome
     kitty
     spice-vdagent
     spice-autorandr
@@ -32,7 +32,7 @@
     uv
     wezterm
     networkmanager-openconnect
-    unstable.vscode.fhs
+    # unstable.vscode.fhs
     # niri
     openconnect-sso
     nerd-fonts.martian-mono

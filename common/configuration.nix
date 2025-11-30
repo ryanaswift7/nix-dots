@@ -112,7 +112,7 @@ in
     packages = with pkgs; [
     #  thunderbird
     ];
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
   };
 
   # home-manager.useGlobalPkgs = true;
@@ -163,12 +163,12 @@ in
   nix.settings.experimental-features = ["nix-command" "flakes"];
   environment.localBinInPath = true;
 
-  services = {
-    spice-vdagentd.enable = true;
-    qemuGuest.enable = true;
-    spice-autorandr.enable = true;
-    openssh.enable = true;
-  };
+  # services = {
+  #   spice-vdagentd.enable = true;
+  #   qemuGuest.enable = true;
+  #   spice-autorandr.enable = true;
+  #   openssh.enable = true;
+  # };
   
   # programs that need to be enabled for system integration
   programs = {
@@ -189,5 +189,10 @@ in
     options = "--delete-older-than 30d";
   };
   boot.loader.systemd-boot.configurationLimit = 15;
+  # systemd.user.services.niri-flake-polkit.enable = false;
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 32*1024;  # 32 GB
+  }];
 
 }

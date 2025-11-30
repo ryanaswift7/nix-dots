@@ -1,6 +1,6 @@
 # /etc/nixos/home.nix
 
-{ config, pkgs, dankMaterialShell, niri, ... }:
+{ config, pkgs, dankMaterialShell, niri-flake, ... }:
 
 # Import the package lists
 let
@@ -11,8 +11,8 @@ in
   imports = [
     ./hm-programs.nix
     dankMaterialShell.homeModules.dankMaterialShell.default
-    niri.homeModules.niri
-    dankMaterialShell.homeModules.dankMaterialShell.niri
+    # dankMaterialShell.homeModules.dankMaterialShell.niri
+    # niri-flake.homeModules.niri
   ];	
 
   # Set user and home directory.

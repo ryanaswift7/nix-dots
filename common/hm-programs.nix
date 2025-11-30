@@ -54,17 +54,17 @@
     # theme = "horizon_dark";
   };
 
-  programs.niri = {
-    enable = true;
-    # package = niri-flake.packages.${pkgs.system}.niri;
-  };
+  # programs.niri = {
+  #   enable = true;
+  #   # package = niri-flake.packages.${pkgs.system}.niri;
+  # };
 
   programs.dankMaterialShell = {
     enable = true;
-    niri = {
-      enableKeybinds = true;  # Automatic keybinding configuration
-      enableSpawn = true;      # Auto-start DMS with niri
-    };
+    # niri = {
+    #   enableKeybinds = true;  # Automatic keybinding configuration
+    #   enableSpawn = true;      # Auto-start DMS with niri
+    # };
     quickshell.package = pkgs.unstable.quickshell;
   };
 

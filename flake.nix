@@ -5,7 +5,7 @@
 
   inputs = {
     # --- Main Channels ---
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # --- Home Manager ---
@@ -27,26 +27,20 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    dms-cli = {
-      url = "github:AvengeMedia/danklinux";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     dankMaterialShell = {
-      url = "github:AvengeMedia/DankMaterialShell";
+      url = "github:AvengeMedia/DankMaterialShell/v0.6.2";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.dgop.follows = "dgop";
-      inputs.dms-cli.follows = "dms-cli";
     };
 
-    niri = {
+    niri-flake = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
   # Make sure to add `openconnect-sso` to the function arguments
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, openconnect-sso, dankMaterialShell, niri, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, openconnect-sso, dankMaterialShell, niri-flake, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -101,7 +95,7 @@
 		home-manager.extraSpecialArgs = {
 		# --- PASS BOTH FLAKES TO HOME.NIX ---
 		  dankMaterialShell = inputs.dankMaterialShell;
-		  niri = inputs.niri;
+		  niri-flake = inputs.niri-flake;
 		};
 		home-manager.users.ryan = import ./common/home.nix;
 	    }
@@ -116,8 +110,43 @@
         nix-hm = home-manager.lib.homeManagerConfiguration {
           # Pass the pkgs set that has both overlays
           pkgs = hm-pkgs; 
-          extraSpecialArgs = { inherit inputs dankMaterialShell niri; }; 
+          extraSpecialArgs = { inherit inputs dankMaterialShell niri-flake; }; 
           modules = [ ./common/home.nix ];
+        };
+      };
+
+      # === OUTPUT 3: NixOS home desktop Configuration ===
+      nixosConfigurations = {
+        home-desktop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+
+          modules = [
+            # --- 3. Apply the Overlays to NixOS ---
+            ({ config, pkgs, ... }: {
+              
+              # === CHANGED ===
+              # Add *both* overlays here as well
+              nixpkgs.overlays = [ unstable-overlay openconnect-overlay ];
+            
+            })
+
+            ./hosts/home-desktop/configuration.nix
+	    ./common/configuration.nix
+	    home-manager.nixosModules.home-manager
+	    {
+	    	home-manager.useGlobalPkgs = true;
+		home-manager.useUserPackages = true;
+		home-manager.extraSpecialArgs = {
+		# --- PASS BOTH FLAKES TO HOME.NIX ---
+		  dankMaterialShell = inputs.dankMaterialShell;
+		  niri-flake = inputs.niri-flake;
+		};
+		home-manager.users.ryan = import ./common/home.nix;
+	    }
+
+            # home-manager.nixosModules.default
+          ];
         };
       };
     };
