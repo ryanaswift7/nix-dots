@@ -1,0 +1,152 @@
+// config.kdl
+
+// set named workspaces
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+workspace "5"
+workspace "6"
+workspace "7"
+workspace "8"
+workspace "9"
+workspace "0"
+
+binds {
+// programs
+	Super+Return hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
+	Super+B hotkey-overlay-title="Open a Browser: Brave" { spawn "brave"; }
+	Super+F	hotkey-overlay-title="Open File Manager: Dolphin" { spawn "dolphin"; }
+	Mod+Shift+Slash { show-hotkey-overlay; }
+	Print { screenshot; }
+	Ctrl+Print { screenshot-screen; }
+    	Alt+Print { screenshot-window; }
+
+// window adjustment
+	Mod+Q repeat=false { close-window; }
+	// The following binds move the focused window in and out of a column.
+    	// If the window is alone, they will consume it into the nearby column to the side.
+    	// If the window is already in a column, they will expel it out.
+    	Mod+BracketLeft  { consume-or-expel-window-left; }
+    	Mod+BracketRight { consume-or-expel-window-right; }
+
+    	// Consume one window from the right to the bottom of the focused column.
+    	Mod+Comma  { consume-window-into-column; }
+    	// Expel the bottom window from the focused column to the right.
+    	Mod+Period { expel-window-from-column; }
+
+    	Mod+R { switch-preset-column-width; }
+    	// Cycling through the presets in reverse order is also possible.
+    	// Mod+R { switch-preset-column-width-back; }
+    	Mod+Shift+R { switch-preset-window-height; }
+    	Mod+Ctrl+R { reset-window-height; }
+    	Mod+F { maximize-column; }
+    	Mod+Shift+F { fullscreen-window; }
+
+    	// Expand the focused column to space not taken up by other fully visible columns.
+	// Makes the column "fill the rest of the space".
+    	Mod+Ctrl+F { expand-column-to-available-width; }
+
+    	Mod+C { center-column; }
+
+    	// Center all fully visible columns on screen.
+    	Mod+Ctrl+C { center-visible-columns; }
+
+	Mod+Minus { set-column-width "-10%"; }
+    	Mod+Equal { set-column-width "+10%"; }
+
+    	// Finer height adjustments when in column with other windows.
+    	Mod+Shift+Minus { set-window-height "-10%"; }
+    	Mod+Shift+Equal { set-window-height "+10%"; }
+
+    	// Move the focused window between the floating and the tiling layout.
+    	Mod+V       { toggle-window-floating; }
+    	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+
+// window workspace binds
+	Mod+1 { focus-workspace "1"; }
+    	Mod+2 { focus-workspace "2"; }
+    	Mod+3 { focus-workspace "3"; }
+    	Mod+4 { focus-workspace "4"; }
+    	Mod+5 { focus-workspace "5"; }
+    	Mod+6 { focus-workspace "6"; }
+    	Mod+7 { focus-workspace "7"; }
+    	Mod+8 { focus-workspace "8"; }
+    	Mod+9 { focus-workspace "9"; }
+    	Mod+0 { focus-workspace "0"; }
+    	Mod+Ctrl+1 { move-column-to-workspace "1"; }
+    	Mod+Ctrl+2 { move-column-to-workspace "2"; }
+    	Mod+Ctrl+3 { move-column-to-workspace "3"; }
+    	Mod+Ctrl+4 { move-column-to-workspace "4"; }
+    	Mod+Ctrl+5 { move-column-to-workspace "5"; }
+    	Mod+Ctrl+6 { move-column-to-workspace "6"; }
+    	Mod+Ctrl+7 { move-column-to-workspace "7"; }
+    	Mod+Ctrl+8 { move-column-to-workspace "8"; }
+    	Mod+Ctrl+9 { move-column-to-workspace "9"; }
+    	Mod+Ctrl+0 { move-column-to-workspace "0"; }
+
+// window focus and movement
+	Mod+Left  { focus-column-left; }
+    	Mod+Down  { focus-window-down; }
+    	Mod+Up    { focus-window-up; }
+    	Mod+Right { focus-column-right; }
+
+	Mod+Ctrl+Left  { move-column-left; }
+    	Mod+Ctrl+Down  { move-window-down; }
+    	Mod+Ctrl+Up    { move-window-up; }
+    	Mod+Ctrl+Right { move-column-right; }
+
+	Mod+Shift+Left  { focus-monitor-left; }
+    	Mod+Shift+Down  { focus-monitor-down; }
+    	Mod+Shift+Up    { focus-monitor-up; }
+    	Mod+Shift+Right { focus-monitor-right; }
+
+	Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    	Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    	Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    	Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+
+
+	// same as above in vim motions
+    	Mod+H     { focus-column-left; }
+    	Mod+J     { focus-window-down; }
+    	Mod+K     { focus-window-up; }
+    	Mod+L     { focus-column-right; }
+
+	Mod+Ctrl+H     { move-column-left; }
+    	Mod+Ctrl+J     { move-window-down; }
+    	Mod+Ctrl+K     { move-window-up; }
+    	Mod+Ctrl+L     { move-column-right; }
+
+	Mod+Shift+H     { focus-monitor-left; }
+    	Mod+Shift+J     { focus-monitor-down; }
+    	Mod+Shift+K     { focus-monitor-up; }
+    	Mod+Shift+L     { focus-monitor-right; }
+
+	Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+    	Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+    	Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+    	Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+
+	
+// media controls
+	XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
+   	XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+   	XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+   	XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+
+   	// Example media keys mapping using playerctl.
+   	// This will work with any MPRIS-enabled media player.
+   	XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+   	XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
+   	XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
+   	XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+
+   	// Example brightness key mappings for brightnessctl.
+   	// You can use regular spawn with multiple arguments too (to avoid going through "sh"),
+   	// but you need to manually put each argument in separate "" quotes.
+   	XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+   	XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+}
+

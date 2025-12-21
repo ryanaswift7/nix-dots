@@ -1,0 +1,53 @@
+Host *
+  ForwardAgent no
+  AddKeystoAgent yes
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
+
+Host server1
+  HostName ${SERVER1_DOMAIN}
+  User ryanswif
+  Port ${SERVER1_PORT}
+  ForwardAgent yes
+
+Host server2
+  HostName ${SERVER2_DOMAIN}
+  User ryanswif
+  Port ${SERVER2_PORT}
+  ForwardAgent yes
+
+Host server3
+  HostName ${SERVER3_DOMAIN}
+  User ryanswif
+  Port ${SERVER3_PORT}
+  ForwardAgent yes
+
+Host server4
+  HostName ${SERVER4_DOMAIN}
+  User ryanswif
+  Port ${SERVER4_PORT}
+  ForwardAgent yes
+
+Host labServer1
+  HostName ${LABSERVER1_IP}
+  User ryanswif
+  Port ${LABSERVER1_PORT}
+  ForwardAgent yes
+
+Host labServer2
+  HostName ${LABSERVER2_IP}
+  User ryanswif
+  Port ${LABSERVER2_PORT}
+  ForwardAgent yes
+
+Host labServer3
+  HostName ${LABSERVER3_IP}
+  User ryanswif
+  Port ${LABSERVER3_PORT}
+  ForwardAgent yes
+
+Host labServer4
+  HostName ${LABSERVER4_IP}
+  User ryanswif
+  Port ${LABSERVER4_PORT}
+  ForwardAgent yes

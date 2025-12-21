@@ -20,7 +20,7 @@ in
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;  # _zen
 
-  # additional kernels -> doesn't work
+  # # additional kernels
   # specialisation = {
   #   zen-kernel = {
   #     configuration = {

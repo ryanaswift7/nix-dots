@@ -12,16 +12,15 @@
     wget
     curl
     tmux
-    # google-chrome
+    google-chrome
     kitty
     spice-vdagent
     spice-autorandr
     gh
     btop
     htop
-
-    # From unstable
-    # unstable.vscode.fhs
+    eza
+    envsubst
   ];
 
   # List of packages for the user
@@ -32,7 +31,6 @@
     uv
     wezterm
     networkmanager-openconnect
-    # unstable.vscode.fhs
     openconnect-sso
     nerd-fonts.martian-mono
     nerd-fonts.jetbrains-mono
