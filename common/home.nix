@@ -1,6 +1,6 @@
 # /etc/nixos/home.nix
 
-{ config, pkgs, dankMaterialShell, niri-flake, ... }:
+{ config, pkgs, ... }:
 
 # Import the package lists
 let
@@ -10,9 +10,6 @@ in
 {
   imports = [
     ./hm-programs.nix
-    dankMaterialShell.homeModules.dankMaterialShell.default
-    # dankMaterialShell.homeModules.dankMaterialShell.niri
-    # niri-flake.homeModules.niri
   ];	
 
   # Set user and home directory.
@@ -29,19 +26,4 @@ in
     source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/nix-dots/alacritty";
     recursive = true;
   };
-
-
-  # --- 2. Use packages in Home Manager options ---
-  # This also works perfectly.
-  # programs.starship = {
-  #   enable = true;
-  #   package = pkgs.unstable.starship; # Explicitly using unstable
-  # };
-  #
-  # programs.neovim = {
-  #   enable = true;
-  #   package = pkgs.unstable.neovim;
-  # };
-  #
-  # programs.git.enable = true;
 }

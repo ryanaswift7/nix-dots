@@ -18,7 +18,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_zen;  # _latest
+  boot.kernelPackages = pkgs.linuxPackages_latest;  # _zen
 
   # additional kernels -> doesn't work
   # specialisation = {
@@ -70,11 +70,11 @@ in
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # enable cosmic de
-  services.desktopManager.cosmic.enable = true;
+  # services.desktopManager.cosmic.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {

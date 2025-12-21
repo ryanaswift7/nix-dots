@@ -33,7 +33,6 @@
     wezterm
     networkmanager-openconnect
     # unstable.vscode.fhs
-    # niri
     openconnect-sso
     nerd-fonts.martian-mono
     nerd-fonts.jetbrains-mono

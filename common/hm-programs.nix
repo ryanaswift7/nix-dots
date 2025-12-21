@@ -1,6 +1,6 @@
 # This is a Nix module that holds all your *enabled*
 # user programs, which will be shared everywhere.
-{ config, pkgs, niri, ... }:
+{ pkgs,... }:
 
 {
   # --- All your shared, enabled programs go here ---
@@ -13,9 +13,6 @@
 	email = "ryanaswift7@gmail.com";
       };
     };
-
-    # userName = 
-    # userEmail = "ryanaswift7@gmail.com";
   };
 
   # programs.starship = {
@@ -54,18 +51,13 @@
     # theme = "horizon_dark";
   };
 
-  # programs.niri = {
-  #   enable = true;
-  #   # package = niri-flake.packages.${pkgs.system}.niri;
-  # };
-
   programs.dankMaterialShell = {
     enable = true;
     # niri = {
     #   enableKeybinds = true;  # Automatic keybinding configuration
     #   enableSpawn = true;      # Auto-start DMS with niri
     # };
-    quickshell.package = pkgs.unstable.quickshell;
+    # quickshell.package = pkgs.quickshell;
   };
 
   programs.btop.enable = true;
