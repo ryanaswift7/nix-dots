@@ -8,26 +8,13 @@ let
   package-set = import ./packages.nix { inherit pkgs; };
 in
 {
-  # imports =
-  #   [ # Include the results of the hardware scan.
-  #     ./hardware-configuration.nix
-  #   ];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;  # _zen
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # # additional kernels
-  # specialisation = {
-  #   zen-kernel = {
-  #     configuration = {
-  #       boot.kernelPackages = pkgs.linuxPackages_zen;
-  #     };
-  #   };
-  # };
 
   # enable keyring unlock at login from gdm
   services.gnome.gnome-keyring.enable = true;
@@ -179,17 +166,19 @@ in
     niri.enable = true;
     neovim.enable = true;
     firefox.enable = true;
-    
   };
 
-  # automatic garbage collection
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
-  };
-  boot.loader.systemd-boot.configurationLimit = 15;
-  # systemd.user.services.niri-flake-polkit.enable = false;
+    programs.nh = {
+      enable = true;
+      clean = {
+	enable = true;
+	extraArgs = "--keep-since 7d --keep 5";
+      };
+      flake = "/home/ryan/nix-dots";
+    };
+
+  boot.loader.systemd-boot.configurationLimit = 5;
+
   swapDevices = [{
     device = "/var/lib/swapfile";
     size = 32*1024;  # 32 GB

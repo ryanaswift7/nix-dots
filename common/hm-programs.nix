@@ -62,8 +62,11 @@
 	alias usc="openconnect-sso -s vpn.usc.edu"
 	alias ta="tmux attach-session -t"
 	alias gs="git status"
+	alias ga="git add ."
 	alias gcm="git commit -m"
 	alias gp="git push"
+	alias v="nvim"
+	alias nors="nh os switch -H"  # alternative to "nixos-rebuild switch --flake /home/ryan/nix-dots#<output-name>"
     '';
   };
 
@@ -83,11 +86,6 @@
 
   programs.dankMaterialShell = {
     enable = true;
-    # niri = {
-    #   enableKeybinds = true;  # Automatic keybinding configuration
-    #   enableSpawn = true;      # Auto-start DMS with niri
-    # };
-    # quickshell.package = pkgs.quickshell;
   };
 
   programs.btop.enable = true;

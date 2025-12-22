@@ -1,5 +1,19 @@
 // config.kdl
 
+// binds dms to niri's service so it only runs under niri (won't start in Plasma/GNOME)
+systemctl --user add-wants niri.service dms
+
+// Clipboard history
+spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
+
+environment {
+  XDG_CURRENT_DESKTOP "niri"
+  QT_QPA_PLATFORM "wayland"
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+  QT_QPA_PLATFORMTHEME "gtk3"
+  QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+}
+
 // set named workspaces
 workspace "1"
 workspace "2"
@@ -14,13 +28,71 @@ workspace "0"
 
 binds {
 // programs
-	Super+Return hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
-	Super+B hotkey-overlay-title="Open a Browser: Brave" { spawn "brave"; }
-	Super+F	hotkey-overlay-title="Open File Manager: Dolphin" { spawn "dolphin"; }
+	Mod+Return hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
+	Mod+B hotkey-overlay-title="Open a Browser: Brave" { spawn "brave"; }
+	Mod+F	hotkey-overlay-title="Open File Manager: Dolphin" { spawn "dolphin"; }
 	Mod+Shift+Slash { show-hotkey-overlay; }
 	Print { screenshot; }
 	Ctrl+Print { screenshot-screen; }
     	Alt+Print { screenshot-window; }
+
+// dms binds
+   	 // Application Launchers
+   	 Mod+Space hotkey-overlay-title="Application Launcher" {
+   	     spawn "dms" "ipc" "call" "spotlight" "toggle";
+   	 }
+   	 Alt+V hotkey-overlay-title="Clipboard Manager" {
+   	     spawn "dms" "ipc" "call" "clipboard" "toggle";
+   	 }
+   	 Alt+M hotkey-overlay-title="Task Manager" {
+   	     spawn "dms" "ipc" "call" "processlist" "focusOrToggle";
+   	 }
+   	 Mod+S hotkey-overlay-title="Settings" {
+   	     spawn "dms" "ipc" "call" "settings" "focusOrToggle";
+   	 }
+   	 Alt+N hotkey-overlay-title="Notification Center" {
+   	     spawn "dms" "ipc" "call" "notifications" "toggle";
+   	 }
+   	 Alt+W hotkey-overlay-title="Browse Wallpapers" {
+   	     spawn "dms" "ipc" "call" "dankdash" "wallpaper";
+   	 }
+
+   	 // Security
+   	 Mod+Escape hotkey-overlay-title="Lock Screen" {
+   	     spawn "dms" "ipc" "call" "lock" "lock";
+   	 }
+
+   	 // Audio Controls
+   	 XF86AudioRaiseVolume allow-when-locked=true {
+   	     spawn "dms" "ipc" "call" "audio" "increment" "3";
+   	 }
+   	 XF86AudioLowerVolume allow-when-locked=true {
+   	     spawn "dms" "ipc" "call" "audio" "decrement" "3";
+   	 }
+   	 XF86AudioMute allow-when-locked=true {
+   	     spawn "dms" "ipc" "call" "audio" "mute";
+   	 }
+
+   	 // Brightness Controls
+   	 XF86MonBrightnessUp allow-when-locked=true {
+   	    spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
+   	 }
+   	 XF86MonBrightnessDown allow-when-locked=true {
+   	    spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
+   	 }
+   		
+   	 XF86AudioMicMute     allow-when-locked=true { 
+	    spawn "dms" "ipc" "call" "audio" "micmute";
+    	 }
+
+   	
+    	// Example media keys mapping using playerctl.
+    	// This will work with any MPRIS-enabled media player.
+   	XF86AudioPlay        allow-when-locked=true { spawn-sh "dms ipc call mpris play"; }
+	XF86AudioPause	     allow-when-locked=true { spawn-sh "dms ipc call mpris pause"; }
+   	XF86AudioStop        allow-when-locked=true { spawn-sh "dms ipc call mpris stop"; }
+   	XF86AudioPrev        allow-when-locked=true { spawn-sh "dms ipc call mpris previous"; }
+   	XF86AudioNext        allow-when-locked=true { spawn-sh "dms ipc call mpris next"; }
 
 // window adjustment
 	Mod+Q repeat=false { close-window; }
@@ -128,25 +200,59 @@ binds {
     	Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
     	Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
     	Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
-
-	
-// media controls
-	XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
-   	XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-   	XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-   	XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-
-   	// Example media keys mapping using playerctl.
-   	// This will work with any MPRIS-enabled media player.
-   	XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-   	XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-   	XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-   	XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
-
-   	// Example brightness key mappings for brightnessctl.
-   	// You can use regular spawn with multiple arguments too (to avoid going through "sh"),
-   	// but you need to manually put each argument in separate "" quotes.
-   	XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-   	XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 }
+
+window-rule {
+    match app-id=r#"^org\.gnome\."#
+    draw-border-with-background false
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    match app-id="Alacritty"
+    match app-id="zen"
+    match app-id="com.mitchellh.ghostty"
+    match app-id="kitty"
+    draw-border-with-background false
+}
+
+window-rule {
+    match is-active=false
+    opacity 0.9
+}
+
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+// Open DMS windows as floating by default
+window-rule {
+    match app-id=r#"org.quickshell$"#
+    open-floating true
+}
+
+
+layout {
+	gaps 5
+	background-color "transparent"
+}
+
+layer-rule {
+	match-namespace="^quickshell$"
+    	place-within-backdrop true
+}
+
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    place-within-backdrop true
+}
+
+// from dms docs
+include "dms/colors.kdl"
+include "dms/layout.kdl"
+include "dms/alttab.kdl"
+include "dms/binds.kdl"
 

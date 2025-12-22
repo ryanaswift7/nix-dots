@@ -21,6 +21,7 @@
     htop
     eza
     envsubst
+    speedtest-cli
   ];
 
   # List of packages for the user

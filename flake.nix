@@ -49,7 +49,6 @@
 	      imports = [
 	        ./common/home.nix
 		inputs.dankMaterialShell.homeModules.dankMaterialShell.default
-	        # inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
 	      ];
 	    };
           };
