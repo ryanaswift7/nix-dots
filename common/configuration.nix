@@ -184,4 +184,6 @@ in
     size = 32*1024;  # 32 GB
   }];
 
+  systemd.user.services.niri.wants = [ "dms.service" ];
+
 }

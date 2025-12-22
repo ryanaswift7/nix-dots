@@ -1,8 +1,5 @@
 // config.kdl
 
-// binds dms to niri's service so it only runs under niri (won't start in Plasma/GNOME)
-systemctl --user add-wants niri.service dms
-
 // Clipboard history
 spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 
@@ -27,6 +24,8 @@ workspace "9"
 workspace "0"
 
 binds {
+// niri commands
+	Mod+Shift+E hotkey-overlay-title="Exit niri" { quit; }
 // programs
 	Mod+Return hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
 	Mod+B hotkey-overlay-title="Open a Browser: Brave" { spawn "brave"; }
@@ -86,8 +85,6 @@ binds {
     	 }
 
    	
-    	// Example media keys mapping using playerctl.
-    	// This will work with any MPRIS-enabled media player.
    	XF86AudioPlay        allow-when-locked=true { spawn-sh "dms ipc call mpris play"; }
 	XF86AudioPause	     allow-when-locked=true { spawn-sh "dms ipc call mpris pause"; }
    	XF86AudioStop        allow-when-locked=true { spawn-sh "dms ipc call mpris stop"; }
@@ -112,8 +109,8 @@ binds {
     	// Mod+R { switch-preset-column-width-back; }
     	Mod+Shift+R { switch-preset-window-height; }
     	Mod+Ctrl+R { reset-window-height; }
-    	Mod+F { maximize-column; }
-    	Mod+Shift+F { fullscreen-window; }
+    	Mod+M { maximize-column; }
+    	Mod+Shift+M { fullscreen-window; }
 
     	// Expand the focused column to space not taken up by other fully visible columns.
 	// Makes the column "fill the rest of the space".
@@ -160,19 +157,19 @@ binds {
 
 // window focus and movement
 	Mod+Left  { focus-column-left; }
-    	Mod+Down  { focus-window-down; }
-    	Mod+Up    { focus-window-up; }
+    	Mod+Down  { focus-window-or-workspace-down; }
+    	Mod+Up    { focus-window-or-workspace-up; }
     	Mod+Right { focus-column-right; }
 
-	Mod+Ctrl+Left  { move-column-left; }
-    	Mod+Ctrl+Down  { move-window-down; }
-    	Mod+Ctrl+Up    { move-window-up; }
-    	Mod+Ctrl+Right { move-column-right; }
+	Mod+Shift+Left  { move-column-left; }
+    	Mod+Shift+Down  { move-window-down-or-to-workspace-down; }
+    	Mod+Shift+Up    { move-window-up-or-to-workspace-up; }
+    	Mod+Shift+Right { move-column-right; }
 
-	Mod+Shift+Left  { focus-monitor-left; }
-    	Mod+Shift+Down  { focus-monitor-down; }
-    	Mod+Shift+Up    { focus-monitor-up; }
-    	Mod+Shift+Right { focus-monitor-right; }
+	Mod+Ctrl+Left  { focus-monitor-left; }
+    	Mod+Ctrl+Down  { focus-monitor-down; }
+    	Mod+Ctrl+Up    { focus-monitor-up; }
+    	Mod+Ctrl+Right { focus-monitor-right; }
 
 	Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
     	Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
@@ -182,19 +179,19 @@ binds {
 
 	// same as above in vim motions
     	Mod+H     { focus-column-left; }
-    	Mod+J     { focus-window-down; }
-    	Mod+K     { focus-window-up; }
+    	Mod+J     { focus-window-or-workspace-down; }
+    	Mod+K     { focus-window-or-workspace-up; }
     	Mod+L     { focus-column-right; }
 
-	Mod+Ctrl+H     { move-column-left; }
-    	Mod+Ctrl+J     { move-window-down; }
-    	Mod+Ctrl+K     { move-window-up; }
-    	Mod+Ctrl+L     { move-column-right; }
+	Mod+Shift+H     { move-column-left; }
+    	Mod+Shift+J     { move-window-down-or-to-workspace-down; }
+    	Mod+Shift+K     { move-window-up-or-to-workspace-up; }
+    	Mod+Shift+L     { move-column-right; }
 
-	Mod+Shift+H     { focus-monitor-left; }
-    	Mod+Shift+J     { focus-monitor-down; }
-    	Mod+Shift+K     { focus-monitor-up; }
-    	Mod+Shift+L     { focus-monitor-right; }
+	Mod+Ctrl+H     { focus-monitor-left; }
+    	Mod+Ctrl+J     { focus-monitor-down; }
+    	Mod+Ctrl+K     { focus-monitor-up; }
+    	Mod+Ctrl+L     { focus-monitor-right; }
 
 	Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
     	Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
@@ -236,12 +233,41 @@ window-rule {
 
 
 layout {
-	gaps 5
+	gaps 10
 	background-color "transparent"
+	center-focused-column "never"
+	preset-column-widths {
+		proportion 0.50
+		proportion 1.00
+	}
+	default-column-width { proportion 0.50; }
+	focus-ring {
+		width 2
+		active-color "#7fc8ff"
+		inactive-color "#505050"
+	}
+	border { off; }
+	shadow {
+		on
+		softness 30
+		spread 5
+		offset x=0 y=5
+		color "#0007"
+	}
+	struts {
+		left 32
+		right 32
+		top 16
+		bottom 16
+	}
 }
 
+prefer-no-csd
+hotkey-overlay { skip-at-startup; }
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
 layer-rule {
-	match-namespace="^quickshell$"
+	match namespace="^quickshell$"
     	place-within-backdrop true
 }
 

@@ -22,6 +22,7 @@
     eza
     envsubst
     speedtest-cli
+    xwayland-satellite
   ];
 
   # List of packages for the user
