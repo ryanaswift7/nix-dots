@@ -20,6 +20,7 @@ environment {
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "NIRI_SOCKET" "PATH"
 spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 spawn-at-startup "xwayland-satellite"
+spawn-at-startup "bash" "mpvpaper" "-o" "no-audio --loop --panscan=1.0" "ASUSTek COMPUTER INC - ASUS XG32VQR - DP-1" "/home/ryan/Pictures/wallpapers/rocket-launch.mp4"
 
 // set named workspaces
 workspace "1"

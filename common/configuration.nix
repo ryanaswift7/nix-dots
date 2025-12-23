@@ -40,6 +40,7 @@ in
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
+  time.hardwareClockInLocalTime = true;  # fix dual boot clock
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -206,4 +207,7 @@ in
   };
   
   home-manager.backupFileExtension = "preHM";
+
+  services.udisks2.enable = true;
+  programs.gnome-disks.enable = true;
 }

@@ -135,5 +135,7 @@
     };
   };
 
+  programs.mpvpaper.enable = true;
+
 
 }

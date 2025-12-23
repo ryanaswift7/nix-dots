@@ -24,6 +24,8 @@
     speedtest-cli
     xwayland-satellite
     steam-run
+    gptfdisk
+    gparted
   ];
 
   # List of packages for the user

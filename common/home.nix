@@ -55,4 +55,6 @@ in
     name = "Adwaita";
     size = 12;
   };
+
+  services.udiskie.enable = true;
 }
