@@ -19,6 +19,9 @@ in
   # enable keyring unlock at login from gdm
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.gdm.enableGnomeKeyring = true;
+  security.polkit = {
+    enable = true;
+  };
 
   # this allows for LUKS password input to unlock keyring
   # even if autologin is on
@@ -163,7 +166,9 @@ in
     fish.enable = true;
     zsh.enable = true;
     chromium.enable = true;
-    niri.enable = true;
+    niri = {
+      enable = true;
+    };
     neovim.enable = true;
     firefox.enable = true;
   };
@@ -185,5 +190,20 @@ in
   }];
 
   systemd.user.services.niri.wants = [ "dms.service" ];
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  services.dbus.packages = with pkgs; [ 
+    niri
+    nautilus
+  ];
+  services.displayManager.sessionPackages = [ pkgs.niri ];
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gnome 
+      xdg-desktop-portal-gtk 
+    ];
+  };
+  
+  home-manager.backupFileExtension = "preHM";
 }

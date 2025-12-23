@@ -42,4 +42,17 @@ in
     source = config.lib.file.mkOutOfStoreSymlink "${dots}/ssh/config.tmpl";
 
   };
+
+  xdg.configFile."DankMaterialShell" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${dots}/DankMaterialShell";
+  };
+
+  # Example for Home Manager
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    package = pkgs.adwaita-icon-theme;
+    name = "Adwaita";
+    size = 12;
+  };
 }

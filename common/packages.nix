@@ -23,6 +23,7 @@
     envsubst
     speedtest-cli
     xwayland-satellite
+    alacritty
   ];
 
   # List of packages for the user

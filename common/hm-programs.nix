@@ -66,7 +66,8 @@
 	alias gcm="git commit -m"
 	alias gp="git push"
 	alias v="nvim"
-	alias nors="nh os switch -H"  # alternative to "nixos-rebuild switch --flake /home/ryan/nix-dots#<output-name>"
+	alias nors-hd="nixos-rebuild switch --flake /home/ryan/nix-dots#home-desktop"
+	alias nhos-hd="nh os switch -H home-desktop"
     '';
   };
 
@@ -81,8 +82,9 @@
 
   programs.alacritty = {
     enable = true;
-    # theme = "horizon_dark";
   };
+
+  programs.foot.enable = true;
 
   programs.dankMaterialShell = {
     enable = true;
