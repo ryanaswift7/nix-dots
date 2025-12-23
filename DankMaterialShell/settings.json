@@ -96,7 +96,7 @@
   "showWorkspaceApps": true,
   "maxWorkspaceIcons": 2,
   "workspacesPerMonitor": true,
-  "showOccupiedWorkspacesOnly": false,
+  "showOccupiedWorkspacesOnly": true,
   "dwlShowAllTags": false,
   "workspaceNameIcons": false,
   "waveProgressEnabled": true,
@@ -146,8 +146,8 @@
   "soundNewNotification": true,
   "soundVolumeChanged": true,
   "soundPluggedIn": true,
-  "acMonitorTimeout": 0,
-  "acLockTimeout": 0,
+  "acMonitorTimeout": 1800,
+  "acLockTimeout": 1800,
   "acSuspendTimeout": 0,
   "acSuspendBehavior": 0,
   "acProfileName": "",
@@ -156,10 +156,10 @@
   "batterySuspendTimeout": 0,
   "batterySuspendBehavior": 0,
   "batteryProfileName": "",
-  "lockBeforeSuspend": false,
+  "lockBeforeSuspend": true,
   "loginctlLockIntegration": true,
-  "fadeToLockEnabled": false,
-  "fadeToLockGracePeriod": 5,
+  "fadeToLockEnabled": true,
+  "fadeToLockGracePeriod": 10,
   "launchPrefix": "",
   "brightnessDevicePins": {},
   "wifiNetworkPins": {},
@@ -196,7 +196,7 @@
   "notificationTimeoutNormal": 5000,
   "notificationTimeoutCritical": 0,
   "notificationPopupPosition": 0,
-  "osdAlwaysShowValue": false,
+  "osdAlwaysShowValue": true,
   "osdPosition": 5,
   "osdVolumeEnabled": true,
   "osdMediaVolumeEnabled": true,
@@ -216,7 +216,7 @@
     "suspend",
     "restart"
   ],
-  "powerMenuDefaultAction": "logout",
+  "powerMenuDefaultAction": "poweroff",
   "powerMenuGridLayout": false,
   "customPowerActionLock": "",
   "customPowerActionLogout": "",
@@ -293,10 +293,6 @@
         },
         {
           "id": "systemTray",
-          "enabled": true
-        },
-        {
-          "id": "vpn",
           "enabled": true
         },
         {

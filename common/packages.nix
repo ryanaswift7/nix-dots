@@ -23,7 +23,7 @@
     envsubst
     speedtest-cli
     xwayland-satellite
-    alacritty
+    steam-run
   ];
 
   # List of packages for the user

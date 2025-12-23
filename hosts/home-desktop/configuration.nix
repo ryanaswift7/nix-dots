@@ -13,15 +13,15 @@
     hardware.nvidia.open = false;
     hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
 
-  specialisation."zen-kernel".configuration = {
-    environment.etc."specialisation".text = "zen-kernel";
-    system.nixos.tags = [ "zen-kernel" ];
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_zen;
+  specialisation."LTS".configuration = {
+    environment.etc."specialisation".text = "LTS";
+    system.nixos.tags = [ "LTS" ];
+    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
   };
 
-  specialisation."gaming".configuration = {
-    environment.etc."specialisation".text = "gaming";
-    system.nixos.tags = [ "gaming" ];
+  specialisation."GAMING".configuration = {
+    environment.etc."specialisation".text = "GAMING";
+    system.nixos.tags = [ "GAMING" ];
     boot.kernelPackages = lib.mkForce pkgs.linuxPackages_zen;
 
     boot.kernelParams = [ 
@@ -34,11 +34,20 @@
 
     programs.gamemode.enable = true;
     programs.gamescope.enable = true; # Micro-compositor for better upscaling/latency
+
+    programs.steam = {
+      enable = true;
+      # remotePlay.openFirewall = true;
+      # dedicatedServer.openFirewall = true;
+    };
        
     environment.systemPackages = with pkgs; [
       mangohud    # On-screen FPS and performance overlay
       protonup-qt # Easy way to install GE-Proton versions
       lutris      # Launcher for non-Steam games
+      heroic
+      wineWowPackages.waylandFull
+      gamescope-wsi # HDR won't work without this
     ];
 
      powerManagement.cpuFreqGovernor = "performance";
