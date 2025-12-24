@@ -178,7 +178,7 @@ in
       enable = true;
       clean = {
 	enable = true;
-	extraArgs = "--keep-since 7d --keep 5";
+	extraArgs = "--keep-since 7d --keep 3";
       };
       flake = "/home/ryan/nix-dots";
     };

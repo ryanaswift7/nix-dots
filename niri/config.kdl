@@ -78,6 +78,8 @@ binds {
     	Alt+Print { screenshot-window; }
 
 // dms binds
+	 Mod+P hotkey-overlay-title="Open DMS Notepad" { spawn-sh "dms ipc call notepad open"; }
+	 Mod+Shift+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "dms ipc call powermenu toggle"; }
    	 // Application Launchers
    	 Mod+Space hotkey-overlay-title="Application Launcher" {
    	     spawn "dms" "ipc" "call" "spotlight" "toggle";
@@ -100,7 +102,7 @@ binds {
 
    	 // Security
    	 Mod+Escape hotkey-overlay-title="Lock Screen" {
-   	     spawn "dms" "ipc" "call" "lock" "lock";
+   	     spawn-sh "dms ipc call lock lock && sleep 0.5 && niri msg action power-off-monitors";
    	 }
 
    	 // Audio Controls
