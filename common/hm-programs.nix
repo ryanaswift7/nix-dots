@@ -66,7 +66,7 @@
 	alias gcm="git commit -m"
 	alias gp="git push"
 	alias v="nvim"
-	alias nors-hd="nixos-rebuild switch --flake /home/ryan/nix-dots#home-desktop"
+	alias nors-hd="sudo nixos-rebuild switch --flake /home/ryan/nix-dots#home-desktop"
 	alias nhos-hd="nh os switch -H home-desktop"
     '';
   };

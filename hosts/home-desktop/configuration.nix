@@ -10,8 +10,12 @@
     # nvidia
     hardware.graphics.enable = true;
     services.xserver.videoDrivers = [ "nvidia" ];
-    hardware.nvidia.open = false;
-    hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
+    hardware.nvidia = {
+      open = true;
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      powerManagement.enable = true;
+    };
 
   specialisation."LTS".configuration = {
     environment.etc."specialisation".text = "LTS";
