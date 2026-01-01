@@ -166,7 +166,7 @@ in
     nix-ld.enable = true;
     fish.enable = true;
     zsh.enable = true;
-    chromium.enable = true;
+    # chromium.enable = true;
     niri = {
       enable = true;
     };

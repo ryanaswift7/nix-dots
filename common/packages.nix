@@ -26,6 +26,7 @@
     steam-run
     gptfdisk
     gparted
+    ffmpeg-full
   ];
 
   # List of packages for the user
