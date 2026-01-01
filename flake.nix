@@ -43,28 +43,62 @@
         config.allowUnfree = true;
       };
 
+      # Everything you want on every machine goes here.
+      sharedSystemModules = [
+        ./modules/system
+        home-manager.nixosModules.home-manager
+        inputs.dankMaterialShell.nixosModules.dankMaterialShell
+
+        # # Inline module to configure Home Manager dynamically
+        # ({ config, ... }: {
+        #   home-manager = {
+        #     useGlobalPkgs = true;
+        #     useUserPackages = true;
+        #     extraSpecialArgs = { inherit inputs; };
+        #     # This looks at the 'userSettings' defined in each host file!
+        #     users."${config.userSettings.username}" = {
+        #       imports = [
+        #         ./modules/hm
+        #         inputs.dankMaterialShell.homeModules.dankMaterialShell.default
+        #       ];
+        #     };
+        #   };
+        # })
+      ];
+
     in {
       nixosConfigurations = {
-        # Desktop Host
+
         home-desktop = nixpkgs.lib.nixosSystem {
-          inherit pkgs; # Pass the pre-configured pkgs set here
-          specialArgs = { inherit inputs; }; 
+          inherit pkgs;
+          specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/home-desktop/configuration.nix
-            home-manager.nixosModules.home-manager
-          ];
+	    ./hosts/home-desktop
+	  ] ++ sharedSystemModules;
         };
 
-        # Example: Future Laptop Host (uses the exact same global pkgs/overlays)
-        # home-laptop = nixpkgs.lib.nixosSystem {
-        #   inherit pkgs;
-        #   specialArgs = { inherit inputs; };
-        #   modules = [ ./hosts/home-laptop/configuration.nix ... ];
-        # };
+        laptop-vm = nixpkgs.lib.nixosSystem {
+          inherit pkgs;
+          specialArgs = { inherit inputs; };
+          modules = [ 
+	    ./hosts/laptop-vm
+	  ] ++ sharedSystemModules;
+        };
       };
+
+      homeConfigurations = {
+        usc-desktop = home-manager.lib.homemanagerconfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ 
+	    ./hosts/usc-desktop
+	    ./modules/hm
+            inputs.dankmaterialshell.homemodules.dankmaterialshell.default
+          ];
+        };
     };
 }
-# {
+
 #   description = "RS NixOS & Home Manager Flake";
 #
 #   inputs = {
