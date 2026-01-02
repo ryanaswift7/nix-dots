@@ -2,7 +2,7 @@
 
 let
   cfg = config.homeFeatures.git;
-  user = osConfig.userSettings
+  user = osConfig.userSettings;
 in
 {
   options.homeFeatures.git.enable = lib.mkEnableOption "Git configuration";

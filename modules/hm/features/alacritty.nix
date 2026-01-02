@@ -1,8 +1,8 @@
-{ config, lib, pkgs, osConfig... }:
+{ config, lib, pkgs, osConfig, ... }:
 
 let
   cfg = config.homeFeatures.alacritty;
-  dots = osConfig.userSettings.dotfileDirectory
+  dots = osConfig.userSettings.dotfileDirectory;
 in
 {
   options.homeFeatures.alacritty.enable = lib.mkEnableOption "Alacritty terminal with custom dotfiles";

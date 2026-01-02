@@ -3,7 +3,6 @@
 {
 	imports = [
 		./alacritty.nix
-		./default.nix
 		./fonts.nix
 		./gameLaunchers.nix
 		./git.nix
