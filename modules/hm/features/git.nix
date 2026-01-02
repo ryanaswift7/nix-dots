@@ -15,10 +15,7 @@ in
 	  name = user.fullName;
           email = user.email;
 	};
-      };
-    
-      extraConfig = {
-        init.defaultBranch = "main";
+	init.defaultBranch = "main";
       };
     };
     programs.gh.enable = true;

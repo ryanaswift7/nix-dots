@@ -27,33 +27,9 @@
   ];
 
 
-	 home-manager = {
-	#    backupFileExtension = "preHM";
-	#    useGlobalPkgs = true;
-	#    useUserPackages = true;
-	#    extraSpecialArgs = { inherit inputs pkgs; };
-	#
-	   users."${config.userSettings.username}" = { ... }: {
-	#      imports = [
-	#        ../../modules/hm
-	# inputs.dankMaterialShell.homeModules.dankMaterialShell.default
-	#      ];
-	#
-	     # home = {
-	#        username = config.userSettings.username;
-	#        homeDirectory = config.userSettings.homeDirectory;
-	#        stateVersion = config.userSettings.homeStateVersion;
-	#
-	#        packages = with pkgs; [
-	#
-	#        ];
-	#       };
-	#
-	#       programs.home-manager.enable = true;
-	#
-	      homeSuites.workstation = true;
-	   };
-	 };
+  home-manager.users."${config.userSettings.username}" = { ... }: {
+    homeSuites.workstation = true;
+  };
 
   specialisation."LTS".configuration = {
     system.nixos.tags = [ "LTS" ];

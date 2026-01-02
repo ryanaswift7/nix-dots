@@ -13,8 +13,9 @@ in
       btop.enable = true;
       firefox.enable = true;
       kitty.enable = true;
-      udiskie.enable = true;
     };
+
+    services.udiskie.enable = true;
 
     home.packages = with pkgs; [
       brave

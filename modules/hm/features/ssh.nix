@@ -11,12 +11,5 @@ in
     home.file.".ssh/config.tmpl" = {
       source = config.lib.file.mkOutOfStoreSymlink "${dots}/ssh/config.tmpl";
     };
-
-    # at least one of these provides the correct
-    # envsubst needed for templating
-    home.packages = with pkgs; [
-      envsubst
-      gettext
-    ];
   };
 }

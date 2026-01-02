@@ -15,7 +15,7 @@ in
       homeFeatures.zsh.enable = true;
       homeFeatures.git.enable = true;
       homeFeatures.fonts.enable = true;
-      homeFeatures.nvim.enable = true;
+      homeFeatures.neovim.enable = true;
       homeFeatures.ssh.enable = true;
     })
 
@@ -33,7 +33,7 @@ in
       homeSuites.workstation = lib.mkDefault true;
       
       homeFeatures.mangoHud.enable = true;
-      homeFeatures.gameLaunchers = true;
+      homeFeatures.gameLaunchers.enable = true;
     })
   ];
 }

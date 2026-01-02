@@ -11,6 +11,8 @@ let
   ];
 in
 {
+  options.homeFeatures.fonts.enable = lib.mkEnableOption "Selection of fonts";
+
   config = lib.mkIf config.homeFeatures.fonts.enable {
     home.packages = myFonts;
     fonts.fontconfig.enable = true;

@@ -24,7 +24,7 @@ in
       enableCompletion = true;
       syntaxHighlighting.enable = true;
 
-      initExtra = ''
+      initContent = ''
         # 1. GENERATE SSH CONFIG FROM TEMPLATE
         if [ -f "$HOME/.ssh/local_env.sh" ]; then
           source "$HOME/.ssh/local_env.sh"
@@ -34,7 +34,7 @@ in
 
         # 2. Generate ~/.ssh/config from the template using envsubst
         if [ -f "$HOME/.ssh/config.tmpl" ]; then
-          ${pkgs.gettext}/bin/envsubst < "$HOME/.ssh/config.tmpl" > "$HOME/.ssh/config"
+          ${pkgs.envsubst}/bin/envsubst < "$HOME/.ssh/config.tmpl" > "$HOME/.ssh/config"
           chmod 600 "$HOME/.ssh/config"
         else
           echo "Error: SSH config template not found at $HOME/.ssh/config.tmpl" >&2
@@ -54,7 +54,7 @@ in
         alias v="nvim"
         
         # System Management Aliases
-        alias nors-hd="sudo nixos-rebuild switch --flake ${osConfig.userSettings.dotfilesPath}#home-desktop"
+        alias nors-hd="sudo nixos-rebuild switch --flake ${osConfig.userSettings.dotfileDirectory}#home-desktop"
         alias nhos-hd="nh os switch -H home-desktop"
       '';
     };
