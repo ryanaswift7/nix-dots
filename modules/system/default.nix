@@ -2,7 +2,7 @@
 {
   imports = [
     ./features
-    ./settings.nix
+    ./userSettings.nix
     ./suites.nix
-  ]
+  ];
 }

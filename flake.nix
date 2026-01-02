@@ -25,7 +25,6 @@
     let
       system = "x86_64-linux";
 
-      # 1. Define the overlays in the let block
       overlays = [
         inputs.openconnect-sso.overlays.default
         (final: prev: {
@@ -36,69 +35,50 @@
         })
       ];
 
-      # 2. Create a global pkgs instance that includes the overlays
-      # This is the "Master" package set for all configurations
-      pkgs = import nixpkgs {
-        inherit system overlays;
-        config.allowUnfree = true;
-      };
-
-      # Everything you want on every machine goes here.
       sharedSystemModules = [
         ./modules/system
         home-manager.nixosModules.home-manager
         inputs.dankMaterialShell.nixosModules.dankMaterialShell
-
-        # # Inline module to configure Home Manager dynamically
-        # ({ config, ... }: {
-        #   home-manager = {
-        #     useGlobalPkgs = true;
-        #     useUserPackages = true;
-        #     extraSpecialArgs = { inherit inputs; };
-        #     # This looks at the 'userSettings' defined in each host file!
-        #     users."${config.userSettings.username}" = {
-        #       imports = [
-        #         ./modules/hm
-        #         inputs.dankMaterialShell.homeModules.dankMaterialShell.default
-        #       ];
-        #     };
-        #   };
-        # })
+        
+        # This block tells NixOS how to handle packages correctly
+        {
+          nixpkgs.overlays = overlays;
+          nixpkgs.config.allowUnfree = true;
+        }
       ];
 
     in {
       nixosConfigurations = {
-
         home-desktop = nixpkgs.lib.nixosSystem {
-          inherit pkgs;
-          specialArgs = { inherit inputs; };
-          modules = [
-	    ./hosts/home-desktop
-	  ] ++ sharedSystemModules;
+          inherit system;
+          specialArgs = { 
+	    inherit inputs;
+	    identity = import ./hosts/home-desktop/identity.nix;
+	  };
+          modules = [ ./hosts/home-desktop ] ++ sharedSystemModules;
         };
 
-        laptop-vm = nixpkgs.lib.nixosSystem {
-          inherit pkgs;
-          specialArgs = { inherit inputs; };
-          modules = [ 
-	    ./hosts/laptop-vm
-	  ] ++ sharedSystemModules;
-        };
+        # laptop-vm = nixpkgs.lib.nixosSystem {
+        #   inherit system;
+        #   specialArgs = { inherit inputs; };
+        #   modules = [ ./hosts/laptop-vm ] ++ sharedSystemModules;
+        # };
       };
 
-      homeConfigurations = {
-        usc-desktop = home-manager.lib.homemanagerconfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ 
-	    ./hosts/usc-desktop
-	    ./modules/hm
-            inputs.dankmaterialshell.homemodules.dankmaterialshell.default
-          ];
-        };
+      # homeConfigurations = {
+      #   usc-desktop = home-manager.lib.homeManagerConfiguration {
+      #     # Standalone HM still needs a manual pkgs instance
+      #     pkgs = import nixpkgs { inherit system overlays; config.allowUnfree = true; };
+      #     extraSpecialArgs = { inherit inputs; };
+      #     modules = [ 
+      #       ./hosts/usc-desktop
+      #       ./modules/hm
+      #       inputs.dankMaterialShell.homeModules.dankMaterialShell.default
+      #     ];
+      #   };
+      # };
     };
 }
-
 #   description = "RS NixOS & Home Manager Flake";
 #
 #   inputs = {

@@ -1,10 +1,10 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
-  cfg = config.systemFeatures.udiskie;
+  cfg = config.systemFeatures.udisks2;
 in
 {
-  options.systemFeatures.udiskie = {
+  options.systemFeatures.udisks2 = {
     enable = lib.mkEnableOption "Udisks2 and udiskie for automatic disk mounting";
   };
 
@@ -13,7 +13,7 @@ in
 
     environment.systemPackages = with pkgs; [
       udiskie
-      gnome-disks 
+      gnome-disk-utility
     ];
   };
 }

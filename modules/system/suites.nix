@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.systemSuites;
@@ -12,16 +12,17 @@ in
   };
 
   config = lib.mkMerge [
-    # --- HIERARCHY LOGIC ---
-    # If you enable Gaming, it implies Workstation.
-    # If you enable Workstation or Server, it implies Minimal.
+    # --- SAFE HIERARCHY ---
+    # We define the inheritance by looking at all "higher" tiers at once.
+    # This prevents the "Minimal -> Server -> Workstation" chain reaction loop.
     {
       systemSuites.workstation = lib.mkIf cfg.gaming (lib.mkDefault true);
-      systemSuites.minimal = lib.mkIf (cfg.workstation || cfg.server) (lib.mkDefault true);
+      
+      systemSuites.server = lib.mkIf (cfg.workstation || cfg.gaming) (lib.mkDefault true);
+      
+      systemSuites.minimal = lib.mkIf (cfg.server || cfg.workstation || cfg.gaming) (lib.mkDefault true);
     }
-
-    # --- MINIMAL SUITE ---
-    # The foundation for every machine you own.
+    # --- MINIMAL SUITE (The Foundation) ---
     (lib.mkIf cfg.minimal {
       systemFeatures = {
         boot.enable = true;
@@ -33,12 +34,11 @@ in
         time.enable = true;
         neovim.enable = true;
         homeManager.enable = true;
-        minimal.enable = true; # References your minimal.nix feature
+        minimal.enable = true; 
       };
     })
 
-    # --- SERVER SUITE ---
-    # Headless operations, containers, and remote access.
+    # --- SERVER SUITE (Minimal + Server Tools) ---
     (lib.mkIf cfg.server {
       systemFeatures = {
         ssh.enable = true;
@@ -47,8 +47,7 @@ in
       };
     })
 
-    # --- WORKSTATION SUITE ---
-    # Your daily driver desktop environment (includes NVIDIA by default).
+    # --- WORKSTATION SUITE (Server + GUI) ---
     (lib.mkIf cfg.workstation {
       systemFeatures = {
         audio.enable = true;
@@ -58,18 +57,18 @@ in
         x11.enable = lib.mkDefault true;
         distrobox.enable = true;
         gnome.enable = lib.mkDefault true; 
-	niri.enable = lib.mkDefault true;
+        niri.enable = lib.mkDefault true;
         nvidia.enable = lib.mkDefault true;
       };
     })
 
-    # --- GAMING SUITE ---
-    # High-performance tools
+    # --- GAMING SUITE (Workstation + Performance) ---
     (lib.mkIf cfg.gaming {
       systemFeatures = {
         steam.enable = true;
         gamingTools.enable = true;
       };
+      boot.kernelPackages = lib.mkForce pkgs.linuxPackages_zen;
     })
   ];
 }

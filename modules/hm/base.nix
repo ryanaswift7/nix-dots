@@ -15,7 +15,7 @@ in
     users."${user.username}" = { ... }: {
       # We can import other HM-specific files here (like your suites)
       imports = [
-        ./suites.nix
+        ../../hm
         inputs.dankMaterialShell.homeModules.dankMaterialShell.default
       ];
 

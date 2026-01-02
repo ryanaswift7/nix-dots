@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, identity, ... }:
 
 let
   inherit (lib) mkOption types mkDefault;
@@ -49,8 +49,9 @@ in
 
   config = {
     userSettings = {
+      inherit (identity) username systemStateVersion homeStateVersion fullName email hostName;
       homeDirectory = mkDefault "/home/${cfg.username}";
-      dotfileDirectory = mkDefault "${cfg.homeDirectory}/nix-dots/dotfiles";
+      dotfileDirectory = mkDefault "/home/${cfg.username}/nix-dots/dotfiles";
     };
 
     assertions = [

@@ -22,7 +22,7 @@ in
 
     # Essential for Steam on Wayland/Nvidia
     environment.systemPackages = with pkgs; [
-      steamtastic # Optional: better tray icon support
+      steamcmd
     ];
   };
 }

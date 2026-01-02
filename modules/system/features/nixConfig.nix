@@ -1,10 +1,10 @@
-{ config, lib, pkgs, osConfig, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   options.systemFeatures.nixConfig.enable = lib.mkEnableOption "Core Nix and System settings";
 
   config = lib.mkIf config.systemFeatures.nixConfig.enable {
-    system.stateVersion = osConfig.userSettings.systemStateVersion;
+    system.stateVersion = config.userSettings.systemStateVersion;
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     nixpkgs.config.allowUnfree = true;
     environment.localBinInPath = true;
@@ -15,7 +15,7 @@
         enable = true;
         extraArgs = "--keep-since 7d --keep 3";
       };
-      flake = osConfig.userSettings.dotfileDirectory; 
+      flake = config.userSettings.dotfileDirectory; 
     };
 
     programs.nix-ld.enable = true;

@@ -1,8 +1,8 @@
 { ... }:
 {
   imports = [
-    ./base.nix
-    ./suite.nix
+    # ./base.nix
+    ./suites.nix
     ./features
   ];
 }

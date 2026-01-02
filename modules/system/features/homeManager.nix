@@ -1,7 +1,8 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   cfg = config.systemFeatures.homeManager;
+  user = config.userSettings;
 in
 {
   options.systemFeatures.homeManager = {
@@ -10,23 +11,26 @@ in
 
   config = lib.mkIf cfg.enable {
     home-manager = {
-      # If HM finds an existing file (like .bashrc), it renames it to .bashrc.preHM 
-      # instead of failing the build.
       backupFileExtension = "preHM";
-
-      # Use the system-wide nixpkgs
-      # This saves disk space and ensures your system and home apps 
-      # are always on the same version.
       useGlobalPkgs = true;
-
-      # Install packages to /etc/profiles
-      # This makes your HM-installed apps behave exactly like system-installed apps.
       useUserPackages = true;
+      extraSpecialArgs = { inherit inputs user; };
 
-      # Pass system-level variables into Home Manager modules
-      # This is the "magic" that allows your HM modules to see 'osConfig' 
-      # (your userSettings, etc.)
-      extraSpecialArgs = { inherit (config) userSettings; };
+      users."${user.username}" = { ... }: {
+        imports = [
+          ../../hm
+          inputs.dankMaterialShell.homeModules.dankMaterialShell.default
+        ];
+
+        home = {
+          username = user.username;
+          homeDirectory = user.homeDirectory;
+          stateVersion = user.homeStateVersion;
+
+        };
+
+        programs.home-manager.enable = true;
+      };
     };
   };
 }

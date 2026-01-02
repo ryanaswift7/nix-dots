@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.features.minimal;
+  cfg = config.systemFeatures.minimal;
 in
 {
-  options.features.minimal = {
+  options.systemFeatures.minimal = {
     enable = lib.mkEnableOption "minimal set of essential system tools, utilities, programs, etc.";
   };
 
@@ -22,6 +22,10 @@ in
       gptfdisk
       gettext
       envsubst
+      unzip
+      zip
+      ripgrep
+      fd
     ];
 
     programs.dconf.enable = true;
