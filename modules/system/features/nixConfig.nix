@@ -15,7 +15,7 @@
         enable = true;
         extraArgs = "--keep-since 7d --keep 3";
       };
-      flake = config.userSettings.dotfileDirectory; 
+      flake = "${config.userSettings.homeDirectory}/nix-dots"; 
     };
 
     programs.nix-ld.enable = true;

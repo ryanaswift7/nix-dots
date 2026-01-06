@@ -4,7 +4,11 @@
   options.systemFeatures.niri.enable = lib.mkEnableOption "Niri Window Manager";
 
   config = lib.mkIf config.systemFeatures.niri.enable {
-    programs.niri.enable = true;
+    programs.niri = {
+      enable = true;
+      # package = pkgs.unstable.niri;
+    };
+
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     xdg.portal = {
@@ -19,5 +23,9 @@
     services.displayManager.sessionPackages = [ pkgs.niri ];
     systemd.user.services.niri.wants = [ "dms.service" ];
     security.polkit.enable = true;
+
+    environment.systemPackages = with pkgs; [
+      xwayland-satellite
+    ];
   };
 }

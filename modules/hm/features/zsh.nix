@@ -15,7 +15,6 @@ in
       gettext # provides envsubst
       tmux
       nh
-      openconnect-sso
     ];
 
     programs.zsh = {

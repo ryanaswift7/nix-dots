@@ -9,8 +9,8 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      niri
-      xwayland-satellite
+      # niri
+      # xwayland-satellite
     ];
 
     xdg.configFile."niri" = {
@@ -27,5 +27,12 @@ in
       source = config.lib.file.mkOutOfStoreSymlink "${dots}/DankMaterialShell";
     };
 
+    home.file.".local/share/wayland-sessions/niri-hm.desktop".text = ''
+      [Desktop Entry]
+      Name=Niri HM
+      Comment=Scrollable-tiling Wayland compositor
+      Exec=${pkgs.niri}/bin/niri --session
+      Type=Application
+    '';
   };
 }

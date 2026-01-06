@@ -11,6 +11,7 @@
 		./niri.nix
 		./nvim.nix
 		./pointerCursor.nix
+		./school.nix
 		./ssh.nix
 		./vscode.nix
 		./zsh.nix

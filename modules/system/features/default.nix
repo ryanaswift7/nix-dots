@@ -11,6 +11,7 @@
     ./gamingTools.nix
     ./gnome.nix
     ./homeManager.nix
+    ./intelHardwareAcceleration.nix
     ./keyboard.nix
     ./locales.nix
     ./minimal.nix
