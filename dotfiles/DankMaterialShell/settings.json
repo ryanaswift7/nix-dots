@@ -229,7 +229,9 @@
   "updaterTerminalAdditionalParams": "",
   "displayNameMode": "system",
   "screenPreferences": {
-    "wallpaper": []
+    "wallpaper": [
+      "all"
+    ]
   },
   "showOnLastDisplay": {},
   "barConfigs": [

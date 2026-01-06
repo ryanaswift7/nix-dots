@@ -1,11 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   systemSuites.workstation = true;
   systemFeatures.nvidia.enable = true;
   systemFeatures.intelHardwareAcceleration.enable = true;
 
-  # to directly add a new package
   environment.systemPackages = with pkgs; [
 
   ];

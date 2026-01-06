@@ -6,7 +6,6 @@
   config = lib.mkIf config.systemFeatures.niri.enable {
     programs.niri = {
       enable = true;
-      # package = pkgs.unstable.niri;
     };
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -20,8 +19,8 @@
       config.common.default = "gtk";
     };
 
-    services.dbus.packages = with pkgs; [ niri nautilus ];
-    services.displayManager.sessionPackages = [ pkgs.niri ];
+    # services.dbus.packages = with pkgs; [ niri nautilus ];
+    # services.displayManager.sessionPackages = [ pkgs.niri ];
     systemd.user.services.niri.wants = [ "dms.service" ];
     security.polkit.enable = true;
 
