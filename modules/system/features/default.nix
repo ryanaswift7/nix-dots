@@ -4,6 +4,7 @@
   imports = [
     ./audio.nix
     ./autologin.nix
+    ./bluetooth.nix
     ./boot.nix
     ./browsers.nix
     ./distrobox.nix

@@ -59,6 +59,7 @@ in
         gnome.enable = lib.mkDefault true; 
         niri.enable = lib.mkDefault true;
         nvidia.enable = lib.mkDefault true;
+	bluetooth.enable = lib.mkDefault true;
       };
     })
 

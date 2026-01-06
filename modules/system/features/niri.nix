@@ -17,6 +17,7 @@
         xdg-desktop-portal-gnome
         xdg-desktop-portal-gtk
       ];
+      config.common.default = "gtk";
     };
 
     services.dbus.packages = with pkgs; [ niri nautilus ];
