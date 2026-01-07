@@ -9,11 +9,6 @@
 
   ];
 
-  home-manager.users."${config.userSettings.username}" = { ... }: {
-    homeSuites.workstation = true;
-    homeFeatures.school.enable = true;
-  };
-
   specialisation."LTS".configuration = {
     system.nixos.tags = [ "LTS" ];
     boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
