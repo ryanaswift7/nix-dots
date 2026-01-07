@@ -15,7 +15,7 @@
   "nightModeEnabled": false,
   "animationSpeed": 1,
   "customAnimationDuration": 500,
-  "wallpaperFillMode": "Fill",
+  "wallpaperFillMode": "Fit",
   "blurredWallpaperLayer": true,
   "blurWallpaperOnOverview": true,
   "showLauncherButton": true,
@@ -228,7 +228,11 @@
   "updaterCustomCommand": "",
   "updaterTerminalAdditionalParams": "",
   "displayNameMode": "system",
-  "screenPreferences": {},
+  "screenPreferences": {
+    "wallpaper": [
+      "all"
+    ]
+  },
   "showOnLastDisplay": {},
   "barConfigs": [
     {
@@ -271,6 +275,10 @@
         },
         {
           "id": "cpuTemp",
+          "enabled": true
+        },
+        {
+          "id": "memUsage",
           "enabled": true
         },
         {
