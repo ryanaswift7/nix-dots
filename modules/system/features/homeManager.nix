@@ -16,21 +16,20 @@ in
       useUserPackages = true;
       extraSpecialArgs = { inherit inputs user; };
 
-      users."${user.username}" = { ... }: {
-        imports = [
-          ../../hm
-          inputs.dankMaterialShell.homeModules.dankMaterialShell.default
-        ];
-
-        home = {
-          username = user.username;
-          homeDirectory = user.homeDirectory;
-          stateVersion = user.homeStateVersion;
-
-        };
-
-        programs.home-manager.enable = true;
-      };
+      # users."${user.username}" = { ... }: {
+      #   imports = [
+      #     ../../hm
+      #     inputs.dankMaterialShell.homeModules.dankMaterialShell.default
+      #   ];
+      #
+      #   home = {
+      #     username = user.username;
+      #     homeDirectory = user.homeDirectory;
+      #     stateVersion = user.homeStateVersion;
+      #
+      #   };
+      #
+      # };
     };
   };
 }
