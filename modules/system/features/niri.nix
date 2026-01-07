@@ -21,7 +21,7 @@
 
     # services.dbus.packages = with pkgs; [ niri nautilus ];
     # services.displayManager.sessionPackages = [ pkgs.niri ];
-    systemd.user.services.niri.wants = [ "dms.service" ];
+    # systemd.user.services.niri.wants = [ "dms.service" ];
     security.polkit.enable = true;
 
     environment.systemPackages = with pkgs; [

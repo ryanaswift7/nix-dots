@@ -22,7 +22,10 @@ in
     dconf.enable = true;
 
     programs.mpvpaper.enable = true;
-    programs.dankMaterialShell.enable = true;
+    programs.dankMaterialShell = {
+      enable = true;
+      systemd.enable = true;
+    };
     xdg.configFile."DankMaterialShell" = {
       source = config.lib.file.mkOutOfStoreSymlink "${dots}/DankMaterialShell";
     };
