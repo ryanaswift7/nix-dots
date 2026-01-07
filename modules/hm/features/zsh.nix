@@ -1,4 +1,4 @@
-{ config, lib, pkgs, osConfig, ... }:
+{ config, lib, pkgs, userSettings, ... }:
 
 let
   cfg = config.homeFeatures.zsh;
@@ -53,7 +53,7 @@ in
         alias v="nvim"
         
         # System Management Aliases
-        alias nors-hd="sudo nixos-rebuild switch --flake ${osConfig.userSettings.homeDirectory}#home-desktop"
+        alias nors-hd="sudo nixos-rebuild switch --flake ${userSettings.homeDirectory}/nix-dots#home-desktop"
         alias nhos-hd="nh os switch -H home-desktop"
       '';
     };

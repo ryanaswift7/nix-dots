@@ -1,8 +1,7 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, userSettings, ... }:
 
 let
   cfg = config.systemFeatures.homeManager;
-  user = config.userSettings;
 in
 {
   options.systemFeatures.homeManager = {
@@ -14,22 +13,7 @@ in
       backupFileExtension = "preHM";
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = { inherit inputs user; };
-
-      # users."${user.username}" = { ... }: {
-      #   imports = [
-      #     ../../hm
-      #     inputs.dankMaterialShell.homeModules.dankMaterialShell.default
-      #   ];
-      #
-      #   home = {
-      #     username = user.username;
-      #     homeDirectory = user.homeDirectory;
-      #     stateVersion = user.homeStateVersion;
-      #
-      #   };
-      #
-      # };
+      extraSpecialArgs = { inherit inputs userSettings; };
     };
   };
 }

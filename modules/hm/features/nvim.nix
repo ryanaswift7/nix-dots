@@ -1,8 +1,8 @@
-{ config, lib, pkgs, osConfig, ... }:
+{ config, lib, pkgs, userSettings, ... }:
 
 let
   cfg = config.homeFeatures.neovim;
-  dots = osConfig.userSettings.dotfileDirectory;
+  dots = userSettings.dotfileDirectory;
 in
 {
   options.homeFeatures.neovim.enable = lib.mkEnableOption "Neovim with custom dotfiles";

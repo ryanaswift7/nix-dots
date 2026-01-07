@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, userSettings, ... }:
 
 let
   cfg = config.systemFeatures.docker;
@@ -18,6 +18,6 @@ in
     };
 
     # Add the primary user to the docker group
-    users.users.${config.userSettings.username}.extraGroups = [ "docker" ];
+    users.users.${userSettings.username}.extraGroups = [ "docker" ];
   };
 }

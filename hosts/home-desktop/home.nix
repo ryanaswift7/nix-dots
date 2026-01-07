@@ -1,9 +1,6 @@
-{ config, pkgs, inputs, ...}:
-let
-  user = config.userSettings;
-in
+{ config, pkgs, inputs, userSettings, ...}:
 {
-  home-manager.users."${user.username}" = { ... }: {
+  home-manager.users."${userSettings.username}" = { ... }: {
     imports = [
           ../../modules/hm
           inputs.dankMaterialShell.homeModules.dankMaterialShell.default
@@ -12,9 +9,9 @@ in
     homeSuites.workstation = true;
     homeFeatures.school.enable = true;
     home = {
-      username = user.username;
-      homeDirectory = user.homeDirectory;
-      stateVersion = user.homeStateVersion;
+      username = userSettings.username;
+      homeDirectory = userSettings.homeDirectory;
+      stateVersion = userSettings.homeStateVersion;
     };
 
     home.packages = with pkgs; [

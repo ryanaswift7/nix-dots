@@ -1,8 +1,7 @@
-{ config, lib, pkgs, osConfig, ... }:
+{ config, lib, pkgs, userSettings, ... }:
 
 let
   cfg = config.homeFeatures.git;
-  user = osConfig.userSettings;
 in
 {
   options.homeFeatures.git.enable = lib.mkEnableOption "Git configuration";
@@ -12,8 +11,8 @@ in
       enable = true;
       settings = {
         user = {
-	  name = user.fullName;
-          email = user.email;
+	  name = userSettings.fullName;
+          email = userSettings.email;
 	};
 	init.defaultBranch = "main";
       };

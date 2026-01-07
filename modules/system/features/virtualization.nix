@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, userSettings, ... }:
 
 let
   cfg = config.systemFeatures.virtualization;
@@ -13,7 +13,7 @@ in
     (lib.mkIf cfg.guest.enable {
       services.qemuGuest.enable = true;
       services.spice-vdagentd.enable = true;
-      services.spice-autorandr.enable = true; # Automatically resize resolution
+      services.spice-autorandr.enable = true;
     })
 
     (lib.mkIf cfg.host.enable {
@@ -21,7 +21,7 @@ in
       programs.virt-manager.enable = true;
       virtualisation.spiceUSBRedirection.enable = true;
 
-      users.users.${config.userSettings.username}.extraGroups = [ "libvirtd" "kvm" ];
+      users.users.${userSettings.username}.extraGroups = [ "libvirtd" "kvm" ];
 
       networking.firewall.trustedInterfaces = [ "virbr0" ];
 

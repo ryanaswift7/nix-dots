@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, userSettings, ... }:
 
 let
   cfg = config.systemFeatures.autologin;
@@ -11,7 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     services.displayManager.autoLogin = {
       enable = true;
-      user = config.userSettings.username; # Dynamically pulls from your settings
+      user = userSettings.username;
     };
 
     # Workaround for GNOME autologin: 
