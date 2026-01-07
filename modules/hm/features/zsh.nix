@@ -53,7 +53,7 @@ in
         alias v="nvim"
         
         # System Management Aliases
-        alias nors-hd="sudo nixos-rebuild switch --flake ${osConfig.userSettings.dotfileDirectory}#home-desktop"
+        alias nors-hd="sudo nixos-rebuild switch --flake ${osConfig.userSettings.homeDirectory}#home-desktop"
         alias nhos-hd="nh os switch -H home-desktop"
       '';
     };

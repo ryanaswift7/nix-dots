@@ -19,11 +19,12 @@ in
     (lib.mkIf cfg.host.enable {
       virtualisation.libvirtd.enable = true;
       programs.virt-manager.enable = true;
+      virtualisation.spiceUSBRedirection.enable = true;
 
       users.users.${config.userSettings.username}.extraGroups = [ "libvirtd" "kvm" ];
 
-      # Required for some network bridge features
       networking.firewall.trustedInterfaces = [ "virbr0" ];
+
     })
   ];
 }
