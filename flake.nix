@@ -19,9 +19,12 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    nixgl.url = "github:nix-community/nixGL";
+
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixgl, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -34,6 +37,8 @@
           };
         })
       ];
+
+      standaloneHmOverlays = overlays ++ [ nixgl.overlay ];
 
       sharedSystemModules = [
         ./modules/system
@@ -63,7 +68,21 @@
 
       };
 
-      # homeConfigurations = {
+      homeConfigurations = {
+        
+	desktop-vm = home-manager.lib.homeManagerConfiguration {
+	  pkgs = import nixpkgs { 
+	    inherit system;
+	    overlays = standaloneHmOverlays;
+	    config.allowUnfree = true;
+	  };
+	  extraSpecialArgs = {
+	    inherit inputs;
+	    userSettings = mkUserSettings (import ./hosts/desktop-vm/identity.nix);
+	  };
+	  modules = [ ./hosts/desktop-vm ];
+	};
+
       #   usc-desktop = home-manager.lib.homeManagerConfiguration {
       #     # Standalone HM still needs a manual pkgs instance
       #     pkgs = import nixpkgs { inherit system overlays; config.allowUnfree = true; };
@@ -74,6 +93,6 @@
       #       inputs.dankMaterialShell.homeModules.dankMaterialShell.default
       #     ];
       #   };
-      # };
+      };
     };
 }

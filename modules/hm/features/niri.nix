@@ -8,6 +8,11 @@ in
   options.homeFeatures.niri.enable = lib.mkEnableOption "Niri window manager";
 
   config = lib.mkIf cfg.enable {
+  
+  home.packages = with pkgs; [
+    niri
+    xwayland-satellite
+  ];
 
     xdg.configFile."niri" = {
       source = config.lib.file.mkOutOfStoreSymlink "${dots}/niri";
