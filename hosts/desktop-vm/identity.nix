@@ -5,4 +5,5 @@
   hostName = "desktop-vm";
   systemStateVersion = "25.11";
   homeStateVersion = "25.11";
+  isNixOS = false;
 }

@@ -6,4 +6,5 @@
   hostName = "home-desktop";
   systemStateVersion = "25.05";
   homeStateVersion = "25.05";
+  isNixOS = true;
 }

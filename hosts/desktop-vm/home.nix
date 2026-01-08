@@ -15,6 +15,7 @@
 
     home.packages = with pkgs; [
       nixgl.auto.nixGLDefault
+      nixgl.nixGLIntel
     ];
     
     programs.home-manager.enable = true;

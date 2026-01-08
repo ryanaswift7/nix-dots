@@ -10,5 +10,9 @@
     };
 
     users.users.${userSettings.username}.extraGroups = [ "networkmanager" ];
+
+    environment.systemPackages = with pkgs; [
+      openconnect-sso
+    ];
   };
 }

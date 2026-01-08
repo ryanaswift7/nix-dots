@@ -13,7 +13,7 @@ in
     home.packages = with pkgs; [
       zoom-us
       antigravity-fhs
-      openconnect-sso
+      # openconnect-sso
     ];
   };
 }
