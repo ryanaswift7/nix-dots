@@ -15,6 +15,10 @@ in
           email = userSettings.email;
 	};
 	init.defaultBranch = "main";
+	push = {
+          autoSetupRemote = true;
+          default = "current";
+        };
       };
     };
     programs.gh.enable = true;
