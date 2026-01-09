@@ -1,9 +1,3 @@
-Host *
-  ForwardAgent no
-  AddKeystoAgent yes
-  ServerAliveInterval 60
-  ServerAliveCountMax 3
-
 Host server1
   HostName ${SERVER1_DOMAIN}
   User ryanswif
@@ -51,3 +45,9 @@ Host labServer4
   User ryanswif
   Port ${LABSERVER4_PORT}
   ForwardAgent yes
+
+Host *
+  ForwardAgent no
+  AddKeystoAgent yes
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
