@@ -17,6 +17,7 @@ in
       homeFeatures.fonts.enable = true;
       homeFeatures.neovim.enable = true;
       homeFeatures.ssh.enable = true;
+      homeFeatures.nixSettings.enable = true;
     })
 
     (lib.mkIf cfg.workstation {

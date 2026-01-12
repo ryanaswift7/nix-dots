@@ -37,6 +37,8 @@ in
       Comment=Scrollable-tiling Wayland compositor
       Exec=${niri-wrapped}
       Type=Application
+      DesktopNames=pop:GNOME
+      X-GDM-SessionRegisters=true
 
     '';
   };

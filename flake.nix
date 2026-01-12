@@ -83,6 +83,18 @@
 	  modules = [ ./hosts/desktop-vm ];
 	};
 
+	usc-desktop = home-manager.lib.homeManagerConfiguration {
+	  pkgs = import nixpkgs { 
+	    inherit system;
+	    overlays = standaloneHmOverlays;
+	    config.allowUnfree = true;
+	  };
+	  extraSpecialArgs = {
+	    inherit inputs;
+	    userSettings = mkUserSettings (import ./hosts/usc-desktop/identity.nix);
+	  };
+	  modules = [ ./hosts/usc-desktop ];
+	};
       #   usc-desktop = home-manager.lib.homeManagerConfiguration {
       #     # Standalone HM still needs a manual pkgs instance
       #     pkgs = import nixpkgs { inherit system overlays; config.allowUnfree = true; };

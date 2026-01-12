@@ -55,6 +55,8 @@ in
         # System Management Aliases
         alias nors-hd="sudo nixos-rebuild switch --flake ${userSettings.homeDirectory}/nix-dots#home-desktop"
         alias nhos-hd="nh os switch -H home-desktop"
+	alias nhhm-usc="nh home switch ${userSettings.homeDirectory}/nix-dots -c usc-desktop -- --impure"
+	alias hms-usc="home-manager switch --flake ${userSettings.homeDirectory}/nix-dots#usc-desktop --impure"
       '';
     };
 
