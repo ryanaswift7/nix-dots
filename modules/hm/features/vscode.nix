@@ -13,7 +13,7 @@ in
       enable = true;
       package = pkgs.unstable.vscode;
       profiles.default = {
-        extensions = with pkgs.vscode-extensions; [
+        extensions = with pkgs.unstable.vscode-extensions; [
           # Remote Development
           ms-vscode-remote.vscode-remote-extensionpack
 
@@ -31,6 +31,9 @@ in
 	  # Copilot
 	  github.copilot
 	  github.copilot-chat
+
+	  # Github integration
+	  github.vscode-pull-request-github
         ];
 
         userSettings = {
@@ -56,6 +59,7 @@ in
           ];
 
 	  "github.copilot.enable" = true;
+	  "chat.extensionUnification.enabled" = false;
         };
       };
     };
