@@ -17,9 +17,7 @@ in
       # Performance Overlay
       mangohud
       
-      # Wine Management (Bottles is excellent for Wayland)
-      bottles
-      wineWowPackages.stable # 32-bit and 64-bit support
+      wineWowPackages.waylandFull
       winetricks
       
       # Wayland-native micro-compositor for better scaling/HDR
@@ -49,6 +47,11 @@ in
     };
 
     powerManagement.cpuFreqGovernor = "performance";
+    
+    # need to get bottles from flathub
+    services.flatpak.enable = true;
+    # command to enable flathub
+    # flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
   };
 }
