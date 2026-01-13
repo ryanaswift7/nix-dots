@@ -1,4 +1,4 @@
-{ config, lib, userSettings, ... }:
+{ config, lib, pkgs, userSettings, ... }:
 {
   options.systemFeatures.networking.enable  = lib.mkEnableOption "NetworkManager and basic firewall";
   config = lib.mkIf config.systemFeatures.networking.enable {

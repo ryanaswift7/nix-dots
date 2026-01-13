@@ -26,9 +26,14 @@ in
           ms-toolsai.jupyter
           ms-toolsai.jupyter-renderers
           ms-toolsai.vscode-jupyter-slideshow
+
+	  # Copilot
+	  github.copilot
+	  github.copilot-chat
         ];
 
         userSettings = {
+	  "github.auth.useGitHubCLI" = true;
           "python.languageServer" = "Pylance";
           "python.analysis.typeCheckingMode" = "basic";
 
@@ -48,6 +53,9 @@ in
             "charliermarsh.ruff"
             "ms-toolsai.jupyter"
           ];
+
+	  "github.copilot.editor.enableAutoCompletions" = true;
+	  "editor.inlineSuggest.enabled" = true;
         };
       };
     };

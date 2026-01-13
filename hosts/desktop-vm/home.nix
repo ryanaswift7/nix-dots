@@ -7,6 +7,7 @@
 
     homeSuites.workstation = true;
     homeFeatures.school.enable = true;
+    homeFeatures.nixSettings.enable = true;
     home = {
       username = userSettings.username;
       homeDirectory = userSettings.homeDirectory;
