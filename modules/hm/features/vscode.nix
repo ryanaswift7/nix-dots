@@ -11,6 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.vscode = {
       enable = true;
+      package = pkgs.unstable.vscode;
       profiles.default = {
         extensions = with pkgs.vscode-extensions; [
           # Remote Development
@@ -54,8 +55,7 @@ in
             "ms-toolsai.jupyter"
           ];
 
-	  "github.copilot.editor.enableAutoCompletions" = true;
-	  "editor.inlineSuggest.enabled" = true;
+	  "github.copilot.enable" = true;
         };
       };
     };

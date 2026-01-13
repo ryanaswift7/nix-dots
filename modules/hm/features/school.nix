@@ -12,7 +12,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       zoom-us
-      antigravity-fhs
+      unstable.antigravity-fhs
       # openconnect-sso
     ];
   };
