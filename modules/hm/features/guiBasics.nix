@@ -47,6 +47,8 @@ in
       adw-gtk3
       kdePackages.dolphin
       kdePackages.qt6ct
+      nemo-with-extensions
+
     ];
   };
 }

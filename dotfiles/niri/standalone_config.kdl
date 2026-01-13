@@ -68,19 +68,20 @@ binds {
 	Mod+O repeat=false { toggle-overview; }
 
 // programs
-	Mod+Return repeat=false hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
+	Mod+Return repeat=false hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "nixGL" "alacritty"; }
 	// opening brave also opens gnome settings keyboard shortcuts (?!) so the flag fixes that
-	Mod+B hotkey-overlay-title="Open a Browser: Brave" { spawn "brave" "--disable-features=GlobalShortcutsPortal"; }
+	Mod+B hotkey-overlay-title="Open a Browser: Brave" { spawn "nixGL" "brave" "--disable-features=GlobalShortcutsPortal"; }
 	Mod+F	hotkey-overlay-title="Open File Manager: Dolphin" { spawn "dolphin"; }
-	Mod+C hotkey-overlay-title="Open VSCode" { spawn "code"; }
-	Mod+A hotkey-overlay-title="Open Antigravity" { spawn "antigravity"; }
+	Mod+C hotkey-overlay-title="Open VSCode" { spawn "nixGL" "code"; }
+	Mod+A hotkey-overlay-title="Open Antigravity" { spawn "nixGL" "antigravity"; }
+	Mod+N hotkey-overlay-title="Open Notes: Obsidian" { spawn "nixGL" "obsidian"; }
 	Mod+Shift+Slash { show-hotkey-overlay; }
 	Print { screenshot; }
 	Ctrl+Print { screenshot-screen; }
     	Alt+Print { screenshot-window; }
 
 // dms binds
-	 Alt+P hotkey-overlay-title="Open DMS Notepad" { spawn-sh "dms ipc call notepad toggle"; }
+	 Mod+P hotkey-overlay-title="Open DMS Notepad" { spawn-sh "dms ipc call notepad open"; }
 	 Mod+Shift+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "dms ipc call powermenu toggle"; }
    	 // Application Launchers
    	 Mod+Space hotkey-overlay-title="Application Launcher" {

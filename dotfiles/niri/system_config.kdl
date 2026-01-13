@@ -1,0 +1,337 @@
+// config.kdl
+
+environment {
+  PATH "/home/ryan/.local/bin:/run/wrappers/bin:/home/ryan/.nix-profile/bin:/nix/profile/bin:/home/ryan/.local/state/nix/profile/bin:/etc/profiles/per-user/ryan/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
+  XDG_CURRENT_DESKTOP "niri"
+  QT_QPA_PLATFORM "wayland"
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+  QT_QPA_PLATFORMTHEME "gtk3"
+  QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+
+  CLUTTER_BACKEND "wayland"
+  GDK_BACKEND "wayland,x11"
+  MOZ_ENABLE_WAYLAND "1"
+  NIXOS_OZONE_WL "1"
+  QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+
+}
+
+
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "NIRI_SOCKET" "PATH"
+spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
+spawn-at-startup "xwayland-satellite"
+// spawn-at-startup "bash" "mpvpaper" "-o" "no-audio --loop --panscan=1.0" "ASUSTek COMPUTER INC - ASUS XG32VQR - DP-1" "/home/ryan/Pictures/wallpapers/rocket-launch.mp4"
+// spawn-at-startup "dms" "restart"
+
+// set named workspaces
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+workspace "5"
+workspace "6"
+workspace "7"
+workspace "8"
+workspace "9"
+workspace "0"
+
+input {
+	touchpad {
+		tap
+		natural-scroll
+	}
+	focus-follows-mouse max-scroll-amount="10%"
+	mod-key "Super"
+	mod-key-nested "Alt"
+}
+
+output "DP-1" {
+	mode "2560x1440@143.999"
+	scale 1.0
+	transform "normal"
+	variable-refresh-rate on-demand=true
+	focus-at-startup
+}
+
+cursor {
+	hide-when-typing
+	hide-after-inactive-ms 10000
+}
+
+overview {
+	zoom 0.65
+}
+
+binds {
+// niri commands
+	Mod+Shift+E hotkey-overlay-title="Exit niri" { quit; }
+	Mod+O repeat=false { toggle-overview; }
+
+// programs
+	Mod+Return repeat=false hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
+	// opening brave also opens gnome settings keyboard shortcuts (?!) so the flag fixes that
+	Mod+B hotkey-overlay-title="Open a Browser: Brave" { spawn "brave" "--disable-features=GlobalShortcutsPortal"; }
+	Mod+F	hotkey-overlay-title="Open File Manager: Dolphin" { spawn "dolphin"; }
+	Mod+C hotkey-overlay-title="Open VSCode" { spawn "code"; }
+	Mod+Shift+Slash { show-hotkey-overlay; }
+	Print { screenshot; }
+	Ctrl+Print { screenshot-screen; }
+    	Alt+Print { screenshot-window; }
+
+// dms binds
+	 Mod+P hotkey-overlay-title="Open DMS Notepad" { spawn-sh "dms ipc call notepad open"; }
+	 Mod+Shift+Escape hotkey-overlay-title="Open Power Menu" { spawn-sh "dms ipc call powermenu toggle"; }
+   	 // Application Launchers
+   	 Mod+Space hotkey-overlay-title="Application Launcher" {
+   	     spawn "dms" "ipc" "call" "spotlight" "toggle";
+   	 }
+   	 Alt+C hotkey-overlay-title="Clipboard Manager" {
+   	     spawn "dms" "ipc" "call" "clipboard" "toggle";
+   	 }
+   	 Alt+T hotkey-overlay-title="Task Manager" {
+   	     spawn "dms" "ipc" "call" "processlist" "focusOrToggle";
+   	 }
+   	 Mod+S hotkey-overlay-title="Settings" {
+   	     spawn "dms" "ipc" "call" "settings" "focusOrToggle";
+   	 }
+   	 Alt+N hotkey-overlay-title="Notification Center" {
+   	     spawn "dms" "ipc" "call" "notifications" "toggle";
+   	 }
+   	 Alt+W hotkey-overlay-title="Browse Wallpapers" {
+   	     spawn "dms" "ipc" "call" "dankdash" "wallpaper";
+   	 }
+
+   	 // Security
+   	 Mod+Escape hotkey-overlay-title="Lock Screen" {
+   	     spawn-sh "dms ipc call lock lock && sleep 0.5 && niri msg action power-off-monitors";
+   	 }
+
+   	 // Audio Controls
+   	 XF86AudioRaiseVolume allow-when-locked=true {
+   	     spawn "dms" "ipc" "call" "audio" "increment" "3";
+   	 }
+   	 XF86AudioLowerVolume allow-when-locked=true {
+   	     spawn "dms" "ipc" "call" "audio" "decrement" "3";
+   	 }
+   	 XF86AudioMute allow-when-locked=true {
+   	     spawn "dms" "ipc" "call" "audio" "mute";
+   	 }
+
+   	 // Brightness Controls
+   	 XF86MonBrightnessUp allow-when-locked=true {
+   	    spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
+   	 }
+   	 XF86MonBrightnessDown allow-when-locked=true {
+   	    spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
+   	 }
+   		
+   	 XF86AudioMicMute     allow-when-locked=true { 
+	    spawn "dms" "ipc" "call" "audio" "micmute";
+    	 }
+
+   	
+   	XF86AudioPlay        allow-when-locked=true { spawn-sh "dms ipc call mpris play"; }
+	XF86AudioPause	     allow-when-locked=true { spawn-sh "dms ipc call mpris pause"; }
+   	XF86AudioStop        allow-when-locked=true { spawn-sh "dms ipc call mpris stop"; }
+   	XF86AudioPrev        allow-when-locked=true { spawn-sh "dms ipc call mpris previous"; }
+   	XF86AudioNext        allow-when-locked=true { spawn-sh "dms ipc call mpris next"; }
+
+// window adjustment
+	Mod+Q repeat=false { close-window; }
+	// The following binds move the focused window in and out of a column.
+    	// If the window is alone, they will consume it into the nearby column to the side.
+    	// If the window is already in a column, they will expel it out.
+    	Mod+BracketLeft  { consume-or-expel-window-left; }
+    	Mod+BracketRight { consume-or-expel-window-right; }
+
+    	// Consume one window from the right to the bottom of the focused column.
+    	Mod+Comma  { consume-window-into-column; }
+    	// Expel the bottom window from the focused column to the right.
+    	Mod+Period { expel-window-from-column; }
+
+    	Mod+R { switch-preset-column-width; }
+    	// Cycling through the presets in reverse order is also possible.
+    	// Mod+R { switch-preset-column-width-back; }
+    	Mod+Shift+R { switch-preset-window-height; }
+    	Mod+Ctrl+R { reset-window-height; }
+    	Mod+M { maximize-column; }
+    	Mod+Shift+M { fullscreen-window; }
+
+    	// Expand the focused column to space not taken up by other fully visible columns.
+	// Makes the column "fill the rest of the space".
+    	Mod+Ctrl+M { expand-column-to-available-width; }
+
+    	// Mod+C { center-column; }
+
+    	// Center all fully visible columns on screen.
+    	Mod+Ctrl+C { center-visible-columns; }
+
+	Mod+Minus { set-column-width "-10%"; }
+    	Mod+Equal { set-column-width "+10%"; }
+
+    	// Finer height adjustments when in column with other windows.
+    	Mod+Shift+Minus { set-window-height "-10%"; }
+    	Mod+Shift+Equal { set-window-height "+10%"; }
+
+    	// Move the focused window between the floating and the tiling layout.
+    	Mod+V       { toggle-window-floating; }
+    	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+
+// window workspace binds
+	Mod+1 { focus-workspace "1"; }
+    	Mod+2 { focus-workspace "2"; }
+    	Mod+3 { focus-workspace "3"; }
+    	Mod+4 { focus-workspace "4"; }
+    	Mod+5 { focus-workspace "5"; }
+    	Mod+6 { focus-workspace "6"; }
+    	Mod+7 { focus-workspace "7"; }
+    	Mod+8 { focus-workspace "8"; }
+    	Mod+9 { focus-workspace "9"; }
+    	Mod+0 { focus-workspace "0"; }
+    	Mod+Shift+1 { move-column-to-workspace "1"; }
+    	Mod+Shift+2 { move-column-to-workspace "2"; }
+    	Mod+Shift+3 { move-column-to-workspace "3"; }
+    	Mod+Shift+4 { move-column-to-workspace "4"; }
+    	Mod+Shift+5 { move-column-to-workspace "5"; }
+    	Mod+Shift+6 { move-column-to-workspace "6"; }
+    	Mod+Shift+7 { move-column-to-workspace "7"; }
+    	Mod+Shift+8 { move-column-to-workspace "8"; }
+    	Mod+Shift+9 { move-column-to-workspace "9"; }
+    	Mod+Shift+0 { move-column-to-workspace "0"; }
+
+// window focus and movement
+	Mod+Left  { focus-column-left; }
+    	Mod+Down  { focus-window-or-workspace-down; }
+    	Mod+Up    { focus-window-or-workspace-up; }
+    	Mod+Right { focus-column-right; }
+
+	Mod+Shift+Left  { move-column-left; }
+    	Mod+Shift+Down  { move-window-down-or-to-workspace-down; }
+    	Mod+Shift+Up    { move-window-up-or-to-workspace-up; }
+    	Mod+Shift+Right { move-column-right; }
+
+	Mod+Ctrl+Left  { focus-monitor-left; }
+    	Mod+Ctrl+Down  { focus-monitor-down; }
+    	Mod+Ctrl+Up    { focus-monitor-up; }
+    	Mod+Ctrl+Right { focus-monitor-right; }
+
+	Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    	Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    	Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    	Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+
+
+	// same as above in vim motions
+    	Mod+H     { focus-column-left; }
+    	Mod+J     { focus-window-or-workspace-down; }
+    	Mod+K     { focus-window-or-workspace-up; }
+    	Mod+L     { focus-column-right; }
+
+	Mod+Shift+H     { move-column-left; }
+    	Mod+Shift+J     { move-window-down-or-to-workspace-down; }
+    	Mod+Shift+K     { move-window-up-or-to-workspace-up; }
+    	Mod+Shift+L     { move-column-right; }
+
+	Mod+Ctrl+H     { focus-monitor-left; }
+    	Mod+Ctrl+J     { focus-monitor-down; }
+    	Mod+Ctrl+K     { focus-monitor-up; }
+    	Mod+Ctrl+L     { focus-monitor-right; }
+
+	Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+    	Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+    	Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+    	Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+
+	// now with mouse (only allows focus changes)
+	Mod+WheelScrollRight      { focus-column-right; }
+    	Mod+WheelScrollLeft       { focus-column-left; }
+    	Mod+WheelScrollDown      cooldown-ms=150 { focus-window-or-workspace-down; }
+    	Mod+WheelScrollUp        cooldown-ms=150 { focus-window-or-workspace-up; }
+}
+
+window-rule {
+    match app-id=r#"^org\.gnome\."#
+    draw-border-with-background false
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    match app-id="Alacritty"
+    match app-id="zen"
+    match app-id="com.mitchellh.ghostty"
+    match app-id="kitty"
+    draw-border-with-background false
+}
+
+window-rule {
+    match is-active=false
+    opacity 0.9
+}
+
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+// Open DMS windows as floating by default
+window-rule {
+    match app-id=r#"org.quickshell$"#
+    open-floating true
+}
+
+
+layout {
+	gaps 16
+	background-color "transparent"
+	center-focused-column "never"
+	always-center-single-column
+	preset-column-widths {
+		proportion 0.33
+		proportion 0.50
+		proportion 1.00
+	}
+	default-column-width { proportion 0.50; }
+	focus-ring {
+		width 2
+		active-color "#7fc8ff"
+		inactive-color "#505050"
+	}
+	border { off; }
+	shadow {
+		on
+		softness 30
+		spread 5
+		offset x=0 y=5
+		color "#0007"
+	}
+	struts {
+		left 64
+		right 64
+		top 8
+		bottom 8
+	}
+}
+
+prefer-no-csd
+hotkey-overlay { skip-at-startup; }
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+layer-rule {
+	match namespace="^quickshell$"
+    	place-within-backdrop true
+}
+
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    place-within-backdrop true
+}
+
+// from dms docs
+include "dms/colors.kdl"
+include "dms/layout.kdl"
+include "dms/alttab.kdl"
+include "dms/binds.kdl"
+

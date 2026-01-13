@@ -9,6 +9,7 @@
 		./guiBasics.nix
 		./mangoHud.nix
 		./niri.nix
+		./nixSettings.nix
 		./nvim.nix
 		./pointerCursor.nix
 		./school.nix
