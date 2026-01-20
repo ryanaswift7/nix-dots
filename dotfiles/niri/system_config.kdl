@@ -71,7 +71,7 @@ binds {
 	Mod+Return repeat=false hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
 	// opening brave also opens gnome settings keyboard shortcuts (?!) so the flag fixes that
 	Mod+B hotkey-overlay-title="Open a Browser: Brave" { spawn "brave" "--disable-features=GlobalShortcutsPortal"; }
-	Mod+F	hotkey-overlay-title="Open File Manager: Dolphin" { spawn "dolphin"; }
+	Mod+F	hotkey-overlay-title="Open File Manager: Nemo" { spawn "nemo"; }
 	Mod+C hotkey-overlay-title="Open VSCode" { spawn "code"; }
 	Mod+Shift+Slash { show-hotkey-overlay; }
 	Print { screenshot; }

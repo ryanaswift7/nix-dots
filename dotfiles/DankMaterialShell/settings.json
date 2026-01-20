@@ -121,7 +121,7 @@
   "weatherCoordinates": "34.0211224,-118.3964660",
   "useAutoLocation": false,
   "weatherEnabled": true,
-  "networkPreference": "auto",
+  "networkPreference": "wifi",
   "vpnLastConnected": "",
   "iconTheme": "System Default",
   "launcherLogoMode": "os",

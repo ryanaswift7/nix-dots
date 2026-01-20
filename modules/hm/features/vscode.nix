@@ -37,7 +37,6 @@ in
         ];
 
         userSettings = {
-	  "github.auth.useGitHubCLI" = true;
           "python.languageServer" = "Pylance";
           "python.analysis.typeCheckingMode" = "basic";
 
@@ -58,7 +57,7 @@ in
             "ms-toolsai.jupyter"
           ];
 
-	  "github.copilot.enable" = true;
+	  "github.copilot.nextEditSuggestions.enabled" = true;
 	  "chat.extensionUnification.enabled" = false;
         };
       };

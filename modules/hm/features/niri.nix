@@ -21,6 +21,11 @@ in
       in
       config.lib.file.mkOutOfStoreSymlink "${dots}/niri/${fileName}";
 
+    xdg.configFile."niri/dms" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${dots}/niri/dms";
+      recursive = true;
+    };
+
     dconf.enable = true;
 
     programs.mpvpaper.enable = true;
