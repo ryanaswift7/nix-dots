@@ -34,6 +34,9 @@ in
 
 	  # Github integration
 	  github.vscode-pull-request-github
+
+	  # CSV
+	  mechatroner.rainbow-csv
         ];
 
         userSettings = {
