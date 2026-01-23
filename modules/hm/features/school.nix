@@ -13,6 +13,7 @@ in
     home.packages = with pkgs; [
       zoom-us
       unstable.antigravity-fhs
+      zotero
       # openconnect-sso
     ];
   };
