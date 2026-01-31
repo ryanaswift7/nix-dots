@@ -20,6 +20,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    # dgop = {
+    #   url = "github:AvengeMedia/dgop";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
+
     nixgl.url = "github:nix-community/nixGL";
 
   };
@@ -43,9 +48,8 @@
       sharedSystemModules = [
         ./modules/system
         home-manager.nixosModules.home-manager
-        inputs.dankMaterialShell.nixosModules.dankMaterialShell
+        inputs.dankMaterialShell.nixosModules.dank-material-shell
         
-        # This block tells NixOS how to handle packages correctly
         {
           nixpkgs.overlays = overlays;
           nixpkgs.config.allowUnfree = true;
@@ -95,16 +99,6 @@
 	  };
 	  modules = [ ./hosts/usc-desktop ];
 	};
-      #   usc-desktop = home-manager.lib.homeManagerConfiguration {
-      #     # Standalone HM still needs a manual pkgs instance
-      #     pkgs = import nixpkgs { inherit system overlays; config.allowUnfree = true; };
-      #     extraSpecialArgs = { inherit inputs; };
-      #     modules = [ 
-      #       ./hosts/usc-desktop
-      #       ./modules/hm
-      #       inputs.dankMaterialShell.homeModules.dankMaterialShell.default
-      #     ];
-      #   };
       };
     };
 }

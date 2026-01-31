@@ -11,7 +11,7 @@ in
   config = lib.mkIf cfg.enable {
   
     home.packages = with pkgs; [
-      niri
+      # niri
       xwayland-satellite
     ];
 
@@ -29,22 +29,26 @@ in
     dconf.enable = true;
 
     programs.mpvpaper.enable = true;
-    programs.dankMaterialShell = {
+
+    programs.dank-material-shell = {
       enable = true;
+      enableSystemMonitoring = true;
+      dgop.package = pkgs.unstable.dgop;
+
     };
     xdg.configFile."DankMaterialShell" = {
       source = config.lib.file.mkOutOfStoreSymlink "${dots}/DankMaterialShell";
     };
 
-    home.file.".local/share/wayland-sessions/niri-hm.desktop".text = ''
-      [Desktop Entry]
-      Name=Niri HM
-      Comment=Scrollable-tiling Wayland compositor
-      Exec=${niri-wrapped}
-      Type=Application
-      DesktopNames=pop:GNOME
-      X-GDM-SessionRegisters=true
-
-    '';
+    # home.file.".local/share/wayland-sessions/niri-hm.desktop".text = ''
+    #   [Desktop Entry]
+    #   Name=Niri HM
+    #   Comment=Scrollable-tiling Wayland compositor
+    #   Exec=${niri-wrapped}
+    #   Type=Application
+    #   DesktopNames=pop:GNOME
+    #   X-GDM-SessionRegisters=true
+    #
+    # '';
   };
 }

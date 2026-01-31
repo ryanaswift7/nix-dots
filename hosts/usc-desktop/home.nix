@@ -2,7 +2,7 @@
 {
     imports = [
           ../../modules/hm
-          inputs.dankMaterialShell.homeModules.dankMaterialShell.default
+          inputs.dankMaterialShell.homeModules.dank-material-shell
         ];
 
     homeSuites.workstation = true;
