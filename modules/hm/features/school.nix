@@ -14,6 +14,7 @@ in
       zoom-us
       unstable.antigravity-fhs
       zotero
+      slack
       # openconnect-sso
     ];
   };

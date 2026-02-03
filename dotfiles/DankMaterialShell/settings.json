@@ -161,7 +161,7 @@
     }
   ],
   "centeringMode": "index",
-  "clockDateFormat": "",
+  "clockDateFormat": "dddd, MMMM d",
   "lockDateFormat": "",
   "mediaSize": 1,
   "appLauncherViewMode": "list",
