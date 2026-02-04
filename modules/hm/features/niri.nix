@@ -39,16 +39,5 @@ in
     xdg.configFile."DankMaterialShell" = {
       source = config.lib.file.mkOutOfStoreSymlink "${dots}/DankMaterialShell";
     };
-
-    # home.file.".local/share/wayland-sessions/niri-hm.desktop".text = ''
-    #   [Desktop Entry]
-    #   Name=Niri HM
-    #   Comment=Scrollable-tiling Wayland compositor
-    #   Exec=${niri-wrapped}
-    #   Type=Application
-    #   DesktopNames=pop:GNOME
-    #   X-GDM-SessionRegisters=true
-    #
-    # '';
   };
 }

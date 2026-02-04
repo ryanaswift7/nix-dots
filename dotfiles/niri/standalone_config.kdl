@@ -71,7 +71,7 @@ binds {
 	Mod+Return repeat=false hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "nixGL" "alacritty"; }
 	// opening brave also opens gnome settings keyboard shortcuts (?!) so the flag fixes that
 	Mod+B hotkey-overlay-title="Open a Browser: Brave" { spawn "nixGL" "brave" "--disable-features=GlobalShortcutsPortal"; }
-	Mod+F	hotkey-overlay-title="Open File Manager: Dolphin" { spawn "dolphin"; }
+	Mod+F	hotkey-overlay-title="Open File Manager: Nautilus" { spawn "nautilus"; }
 	Mod+C hotkey-overlay-title="Open VSCode" { spawn "nixGL" "code"; }
 	Mod+A hotkey-overlay-title="Open Antigravity" { spawn "nixGL" "antigravity"; }
 	Mod+N hotkey-overlay-title="Open Notes: Obsidian" { spawn "nixGL" "obsidian"; }
@@ -105,7 +105,7 @@ binds {
 
    	 // Security
    	 Mod+Escape hotkey-overlay-title="Lock Screen" {
-   	     spawn-sh "dms ipc call lock lock && sleep 0.5 && niri msg action power-off-monitors";
+   	     spawn-sh "dms ipc call lock lock && sleep 0.75 && niri msg action power-off-monitors";
    	 }
 
    	 // Audio Controls
