@@ -15,6 +15,7 @@
     ./intelHardwareAcceleration.nix
     ./keyboard.nix
     ./locales.nix
+    ./localsend.nix
     ./minimal.nix
     ./neovim.nix
     ./networking.nix

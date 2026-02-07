@@ -60,6 +60,7 @@ in
         niri.enable = lib.mkDefault true;
         nvidia.enable = lib.mkDefault true;
 	bluetooth.enable = lib.mkDefault true;
+	localsend.enable = lib.mkDefault true;
       };
     })
 

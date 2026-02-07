@@ -49,7 +49,6 @@ in
       kdePackages.qt6ct
       nemo
       bitwarden-desktop
-
     ];
   };
 }
