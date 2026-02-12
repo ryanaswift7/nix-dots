@@ -11,9 +11,9 @@ in
   config = lib.mkIf cfg.enable {
     programs.vscode = {
       enable = true;
-      package = pkgs.vscode;
+      package = pkgs.unstable.vscode;
       profiles.default = {
-        extensions = with pkgs.vscode-extensions; [
+        extensions = with pkgs.unstable.vscode-extensions; [
           # Remote Development
           ms-vscode-remote.vscode-remote-extensionpack
 
