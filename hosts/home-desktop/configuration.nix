@@ -12,7 +12,7 @@
   specialisation."LTS".configuration = {
     system.nixos.tags = [ "LTS" ];
     environment.etc."specialisation".text =  "LTS";
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+    boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
   };
 
   specialisation."GAMING".configuration = {
