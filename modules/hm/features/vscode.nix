@@ -13,7 +13,7 @@ in
       enable = true;
       package = pkgs.vscode;
       profiles.default = {
-        extensions = with pkgs.unstable.vscode-extensions; [
+        extensions = with pkgs.vscode-extensions; [
           # Remote Development
           ms-vscode-remote.vscode-remote-extensionpack
 
