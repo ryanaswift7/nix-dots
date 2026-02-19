@@ -29,14 +29,14 @@ in
           ms-toolsai.vscode-jupyter-slideshow
 
 	  # Copilot
-	  github.copilot
+	  # github.copilot -> deprecated
 	  github.copilot-chat
 
 	  # Github integration
 	  github.vscode-pull-request-github
 
 	  # CSV
-	  mechatroner.rainbow-csv
+	  grapecity.gc-excelviewer
         ];
 
         userSettings = {
