@@ -103,7 +103,7 @@ binds {
 
    	 // Security
    	 Mod+Escape hotkey-overlay-title="Lock Screen" {
-   	     spawn-sh "dms ipc call lock lock && sleep 0.75 && niri msg action power-off-monitors";
+   	     spawn-sh "dms ipc call lock lock";  // && sleep 0.75 && niri msg action power-off-monitors";
    	 }
 
    	 // Audio Controls
@@ -274,6 +274,7 @@ window-rule {
 window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
+    tiled-state true
 }
 
 // Open DMS windows as floating by default
@@ -281,6 +282,7 @@ window-rule {
     match app-id=r#"org.quickshell$"#
     open-floating true
 }
+
 
 
 layout {
@@ -308,10 +310,10 @@ layout {
 		color "#0007"
 	}
 	struts {
-		left 64
-		right 64
-		top 8
-		bottom 8
+		left 45
+		right 45
+		// top 8
+		// bottom 8
 	}
 }
 
@@ -331,7 +333,9 @@ layer-rule {
 
 // from dms docs
 include "dms/colors.kdl"
-include "dms/layout.kdl"
+// include "dms/layout.kdl"
 include "dms/alttab.kdl"
 include "dms/binds.kdl"
+include "dms/cursor.kdl"
+
 
