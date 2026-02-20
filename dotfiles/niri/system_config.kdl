@@ -156,6 +156,7 @@ binds {
     	Mod+Ctrl+R { reset-window-height; }
     	Mod+M { maximize-column; }
     	Mod+Shift+M { fullscreen-window; }
+	Mod+Shift+W { toggle-windowed-fullscreen; }
 
     	// Expand the focused column to space not taken up by other fully visible columns.
 	// Makes the column "fill the rest of the space".
