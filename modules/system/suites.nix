@@ -67,7 +67,6 @@ in
     # --- GAMING SUITE (Workstation + Performance) ---
     (lib.mkIf cfg.gaming {
       systemFeatures = {
-        steam.enable = true;
         gamingTools.enable = true;
       };
       boot.kernelPackages = lib.mkForce pkgs.linuxPackages_zen;

@@ -24,7 +24,6 @@
     ./nvidia.nix
     ./printing.nix
     ./ssh.nix
-    ./steam.nix
     ./time.nix
     ./touchpad.nix
     ./udisks2.nix

@@ -17,7 +17,6 @@ in
       homeFeatures.fonts.enable = true;
       homeFeatures.neovim.enable = true;
       homeFeatures.ssh.enable = true;
-      # homeFeatures.nixSettings.enable = true;
     })
 
     (lib.mkIf cfg.workstation {
@@ -34,7 +33,6 @@ in
       homeSuites.workstation = lib.mkDefault true;
       
       homeFeatures.mangoHud.enable = true;
-      homeFeatures.gameLaunchers.enable = true;
     })
   ];
 }
