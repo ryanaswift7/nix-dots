@@ -443,7 +443,15 @@
           "enabled": true
         },
         {
+          "id": "notepadButton",
+          "enabled": true
+        },
+        {
           "id": "cpuTemp",
+          "enabled": true
+        },
+        {
+          "id": "cpuUsage",
           "enabled": true
         },
         {
@@ -451,8 +459,9 @@
           "enabled": true
         },
         {
-          "id": "cpuUsage",
-          "enabled": true
+          "id": "diskUsage",
+          "enabled": true,
+          "mountPath": "/"
         },
         {
           "id": "gpuTemp",
@@ -462,15 +471,6 @@
         },
         {
           "id": "clipboard",
-          "enabled": true
-        },
-        {
-          "id": "diskUsage",
-          "enabled": true,
-          "mountPath": "/"
-        },
-        {
-          "id": "notepadButton",
           "enabled": true
         },
         {
