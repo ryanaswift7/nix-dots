@@ -10,7 +10,7 @@
       memtest86.enable = true;
     };
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
+    boot.kernelPackages = lib.mkDefault pkgs.linuxPackages;
     boot.initrd.systemd.enable = true;
 
     swapDevices = [{

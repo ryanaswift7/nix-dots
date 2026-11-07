@@ -11,7 +11,10 @@ in
   config = lib.mkIf cfg.enable {
     nixpkgs.config.allowUnfree = true;
 
-    services.xserver.videoDrivers = [ "nvidia" ];
+    services.xserver.videoDrivers = [ 
+      "modesetting" 
+      "nvidia" 
+    ];
 
     hardware.graphics = {
       enable = true;
@@ -31,7 +34,7 @@ in
       open = true;
 
       # Enable the Nvidia settings menu, accessible via `nvidia-settings`
-      nvidiaSettings = true;
+      # nvidiaSettings = true;
 
       # Choose the driver version (stable is usually best)
       package = config.boot.kernelPackages.nvidiaPackages.stable;

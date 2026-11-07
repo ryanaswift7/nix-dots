@@ -69,7 +69,7 @@ in
       systemFeatures = {
         gamingTools.enable = true;
       };
-      boot.kernelPackages = lib.mkForce pkgs.linuxPackages_zen;
+      # boot.kernelPackages = lib.mkForce pkgs.linuxPackages_zen;
     })
   ];
 }

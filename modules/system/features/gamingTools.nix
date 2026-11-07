@@ -30,7 +30,7 @@ in
       # Performance Overlay
       mangohud
       
-      wineWowPackages.waylandFull
+      wineWow64Packages.waylandFull
       winetricks
       
       gamescope-wsi  # for HDR

@@ -33,7 +33,6 @@ in
     programs.dank-material-shell = {
       enable = true;
       enableSystemMonitoring = true;
-      dgop.package = pkgs.unstable.dgop;
 
     };
     xdg.configFile."DankMaterialShell" = {

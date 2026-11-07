@@ -11,6 +11,10 @@ in
     programs.neovim = {
       enable = true;
       defaultEditor = true;
+      sideloadInitLua = true;  # gives my dots ownership of config instead of HM
+
+      withPython3 = true;
+      withRuby = false;
       
       # Optional: Add common dependencies for plugins (LSPs, etc.)
       extraPackages = with pkgs; [
