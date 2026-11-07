@@ -11,7 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       distrobox
-      xorg.xhost # Required to allow GUI apps in Distrobox to reach your screen
+      xhost # Required to allow GUI apps in Distrobox to reach your screen
     ];
   };
 }

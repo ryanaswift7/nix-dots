@@ -12,7 +12,6 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       zoom-us
-      unstable.antigravity-fhs
       zotero
       slack
       # openconnect-sso

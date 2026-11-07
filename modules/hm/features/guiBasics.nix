@@ -11,8 +11,11 @@ in
   config = lib.mkIf cfg.enable {
     programs = {
       btop.enable = true;
-      firefox.enable = true;
       kitty.enable = true;
+      firefox = {
+        enable = true;
+        configPath = "${config.xdg.configHome}/mozilla/firefox";
+      };
     };
 
     services.udiskie.enable = true;
