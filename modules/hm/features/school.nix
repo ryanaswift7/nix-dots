@@ -14,7 +14,6 @@ in
       zoom-us
       zotero
       slack
-      # openconnect-sso
     ];
   };
 }

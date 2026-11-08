@@ -4,18 +4,13 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-vpn.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-old.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    openconnect-sso = {
-      url = "github:ThinkChaos/openconnect-sso/fix/nix-flake";
-      inputs.nixpkgs.follows = "nixpkgs-vpn";
     };
 
     dankMaterialShell = {
@@ -38,20 +33,15 @@
     flake-utils.lib.eachSystemPassThrough [ "x86_64-linux" ] (
       system:
       let
-        # Keep the VPN client and its dependencies on Nixpkgs 25.11.
-        vpnPkgs = import inputs.nixpkgs-vpn {
+        # Temporary workaround to keep brave from Nixpkgs 25.11.
+        oldPkgs = import inputs.nixpkgs-old {
           inherit system;
           config.allowUnfree = true;
-
-          overlays = [
-            inputs.openconnect-sso.overlays.default
-          ];
         };
 
         overlays = [
           (final: prev: {
-            openconnect-sso = vpnPkgs.openconnect-sso;
-            brave = vpnPkgs.brave;
+            brave = oldPkgs.brave;
 
             unstable = import nixpkgs-unstable {
               inherit system;

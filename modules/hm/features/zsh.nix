@@ -44,7 +44,7 @@ in
         alias ".."="cd .."
         alias p="python3"
         alias python="python3"
-        alias usc="openconnect-sso -s vpn.usc.edu"
+        alias usc="nmcli --wait 300 connection up usc"
         alias ta="tmux attach-session -t"
         alias gs="git status"
         alias ga="git add ."

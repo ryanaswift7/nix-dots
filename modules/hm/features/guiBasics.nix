@@ -19,10 +19,12 @@ in
     };
 
     services.udiskie.enable = true;
+    services.network-manager-applet.enable = true;
 
     home.packages = with pkgs; [
       (brave.override {
         commandLineArgs = [
+          "--ozone-platform=wayland"
           "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
           "--enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
           "--enable-features=UseMultiPlaneFormatForHardwareVideo"
@@ -32,6 +34,7 @@ in
       })
       (google-chrome.override {
         commandLineArgs = [
+          "--ozone-platform=wayland"
           "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
           "--enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
           "--enable-features=UseMultiPlaneFormatForHardwareVideo"
